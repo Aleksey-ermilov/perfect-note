@@ -57,7 +57,6 @@ const MainPage = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    // padding: 10,
     flex: 1
   },
   noNotes:{
