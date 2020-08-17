@@ -69,16 +69,4 @@ const styles = StyleSheet.create({
 
 export default MainPage;
 
-/*<View style={styles.container}>
-<Text>Main Page</Text>
 
-<Button
-title="Toggle drawer"
-onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-/>
-<Button
-title="push createPage"
-onPress={() => navigation.push('CreatePage')}
-/>
-
-</View>*/
