@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, Keyboard, TouchableOpacity } from 'react-native';
-import { Divider } from 'react-native-paper';
-import ColorBottomNavigation from '../comonents/ColorBottomNavigation';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, Button, StyleSheet, TextInput, Keyboard, TouchableOpacity, Text } from 'react-native';
+import { Divider, Portal, Provider } from 'react-native-paper';
+import { _Modal } from '../comonents/Modal';
+import { ModalContext } from '../../context/context';
 
-const NotePage = ({ route }) => {
-  console.log('params', route.params);
+const NotePage = ({ navigation, route }) => {
+  const { isVisibleModal, Component, hiddenModal } = useContext(ModalContext);
+  // console.log('params', route.params);
+
+  // const [isVisibleModal, setIsVisibleModal] = useState(false);
+
   const [note, setNote] = useState({
     title: '',
     text: '',
-    id: '',
+    // id: '',
     itemBackground: '',
     category: '',
   });
@@ -19,11 +24,16 @@ const NotePage = ({ route }) => {
     }
   }, []);
 
+  useEffect(() => {
+    navigation.setParams({ note });
+  }, [note]);
 
   return (
 
     <View style={styles.container}>
-
+      <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
+        <Component note={note} />
+      </_Modal>
       <TouchableOpacity
         style={{ flex: 1 }}
         activeOpacity={1}
@@ -43,12 +53,12 @@ const NotePage = ({ route }) => {
           placeholder={'Заметка...'}
           multiline={true}
           style={styles.textInput}
+          autoFocus={true}
         />
 
       </TouchableOpacity>
 
     </View>
-
 
   );
 };

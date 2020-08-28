@@ -1,25 +1,22 @@
 import React, { useContext, useState } from 'react';
 import { SafeAreaView, View, Button, Text, StyleSheet, FlatList } from 'react-native';
-// import { FAB, Portal, Provider } from 'react-native-paper';
-
-import { DrawerActions } from '@react-navigation/native';
 
 import CardNote from '../comonents/CardNote';
 import { NoteContext } from '../../context/context';
 import { colors } from '../../theme';
 import _Fab from '../comonents/Fab';
-import { data } from '../../data';
 
 const MainPage = ({ navigation }) => {
-  const { notes, addNote } = useContext(NoteContext);
+  const { notes, removeNote } = useContext(NoteContext);
   const emptyNotes = []
 
   const pressCard = (note) => {
-    console.log('note', note);
+    // console.log('note', note);
     navigation.push('NotePage', { note })
   };
   const pressLongCard = (note) => {
-    console.log('remove', note);
+    // console.log('remove', note);
+    removeNote(note)
   };
 
   const renderItem = ({ item }) => {
