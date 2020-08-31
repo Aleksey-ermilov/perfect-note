@@ -2,20 +2,21 @@ import React, { useContext, useState } from 'react';
 import { SafeAreaView, View, Button, Text, StyleSheet, FlatList } from 'react-native';
 
 import CardNote from '../comonents/CardNote';
-import { NoteContext } from '../../context/context';
-import { colors } from '../../theme';
 import _Fab from '../comonents/Fab';
 
-const MainPage = ({ navigation }) => {
-  const { notes, removeNote } = useContext(NoteContext);
-  const emptyNotes = []
+import { NoteContext } from '../../context/context';
 
+const MainPage = ({ navigation }) => {
+  const { notes, removeNote, selectedNote } = useContext(NoteContext);
+
+  const createNote = () => {
+    navigation.push('NotePage')
+  }
   const pressCard = (note) => {
-    // console.log('note', note);
+    selectedNote(note)
     navigation.push('NotePage', { note })
   };
   const pressLongCard = (note) => {
-    // console.log('remove', note);
     removeNote(note)
   };
 
@@ -46,6 +47,7 @@ const MainPage = ({ navigation }) => {
       }
       <_Fab
         navigation={navigation}
+        createNote={createNote}
       />
     </SafeAreaView>
 

@@ -1,4 +1,4 @@
-import { ADD_NOTE, REMOVE_NOTE, UPDATE_NOTE } from '../types';
+import { ADD_NOTE, REMOVE_NOTE, UPDATE_NOTE, SELECTED_NOTE } from '../types';
 
 const handlers = {
   [ADD_NOTE]: (state, action) => {
@@ -27,6 +27,13 @@ const handlers = {
         }
         return note;
       }),
+    };
+    // return state
+  },
+  [SELECTED_NOTE]: (state, action) => {
+    // console.log('reducer SELECTED_NOTE', action.selectNote);
+    return {
+      ...state, selectNote: action.selectNote
     };
     // return state
   },

@@ -1,24 +1,44 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { View, Button, StyleSheet, TextInput, Keyboard, TouchableOpacity, Text } from 'react-native';
-import { NoteContext, ModalContext } from '../../../context/context';
+import React, { useContext } from 'react';
+import { View, Button, StyleSheet, FlatList } from 'react-native';
 
-export const ColorModal = ({ note }) => {
-  const { updateNote } = useContext(NoteContext);
+import { ModalContext } from '../../../context/context';
+
+import { ColorBox } from '../ColorBox';
+
+import { noteColors } from '../../../theme';
+
+export const ColorModal = ({ getColor }) => {
   const { hiddenModal } = useContext(ModalContext);
+  const selectedColor = (color) => {
+    getColor(color)
+  };
 
-  console.log('color modal', note);
+  const renderItem = ({ item }) => {
+    return (
+      <ColorBox
+        color={item.color}
+        getColor={selectedColor}
+      />
+    );
+  };
   return (
     <View style={styles.container}>
-      <Text>color modal</Text>
-      <Button onPress={() => hiddenModal()} title={'hidden modal'} />
+      <FlatList
+        data={noteColors}
+        renderItem={renderItem}
+        keyExtractor={item => item.color}
+        numColumns={3}
+        columnWrapperStyle={{ justifyContent: 'space-around' }}
+      />
+      <Button onPress={() => hiddenModal()} title={'Закрыть'}/>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  container:{
-    width: 350,
+  container: {
+    width: 300,
     height: 400,
     // backgroundColor: 'white',
-  }
-})
+  },
+});

@@ -1,20 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Button, StyleSheet, TextInput, Keyboard, TouchableOpacity, Text } from 'react-native';
-import { Divider, Portal, Provider } from 'react-native-paper';
+import { View, StyleSheet, TextInput, Keyboard, TouchableOpacity } from 'react-native';
+import { Divider } from 'react-native-paper';
+
 import { _Modal } from '../comonents/Modal';
+
 import { ModalContext } from '../../context/context';
 
 const NotePage = ({ navigation, route }) => {
   const { isVisibleModal, Component, hiddenModal } = useContext(ModalContext);
-  // console.log('params', route.params);
-
-  // const [isVisibleModal, setIsVisibleModal] = useState(false);
 
   const [note, setNote] = useState({
     title: '',
     text: '',
     // id: '',
-    itemBackground: '',
+    itemBackground: '#fff',
     category: '',
   });
 
@@ -28,11 +27,14 @@ const NotePage = ({ navigation, route }) => {
     navigation.setParams({ note });
   }, [note]);
 
-  return (
+  const getColor = (color) => {
+    setNote(prev => ({ ...prev, itemBackground: color }))
+  }
 
-    <View style={styles.container}>
+  return (
+    <View style={{ ...styles.container, backgroundColor: note.itemBackground }}>
       <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
-        <Component note={note} />
+        <Component getColor={getColor} />
       </_Modal>
       <TouchableOpacity
         style={{ flex: 1 }}
@@ -44,7 +46,7 @@ const NotePage = ({ navigation, route }) => {
           onChangeText={text => setNote(prev => ({ ...prev, title: text }))}
           placeholder={'Заголовок'}
           multiline={true}
-          style={styles.titleInput}
+          style={{ ...styles.titleInput,  backgroundColor: note.itemBackground }}
         />
         <Divider/>
         <TextInput
@@ -52,14 +54,11 @@ const NotePage = ({ navigation, route }) => {
           onChangeText={text => setNote(prev => ({ ...prev, text }))}
           placeholder={'Заметка...'}
           multiline={true}
-          style={styles.textInput}
+          style={{ ...styles.textInput, backgroundColor: note.itemBackground }}
           autoFocus={true}
         />
-
       </TouchableOpacity>
-
     </View>
-
   );
 };
 

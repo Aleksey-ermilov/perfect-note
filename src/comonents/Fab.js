@@ -4,7 +4,7 @@ import { FAB, Portal, Provider } from 'react-native-paper';
 
 import { colors } from '../../theme';
 
-export const _Fab = ({ navigation }) => {
+export const _Fab = ({ navigation, createNote }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -19,7 +19,8 @@ export const _Fab = ({ navigation }) => {
               icon: 'pencil',
               onPress: () => {
                 console.log('text note');
-                navigation.push('NotePage');
+                // navigation.push('NotePage');
+                createNote()
               },
               color: colors.text,
               style: styles.itemFab,
@@ -28,7 +29,8 @@ export const _Fab = ({ navigation }) => {
               icon: 'check-box-multiple-outline',
               onPress: () => {
                 console.log('Check list');
-                navigation.push('NotePage');
+                createNote()
+                // navigation.push('NotePage');
               },
               color: colors.text,
               style: styles.itemFab,
