@@ -1,14 +1,33 @@
-import { ADD_NOTE, REMOVE_NOTE, UPDATE_NOTE, SELECTED_NOTE } from '../types';
+import { ADD_NOTE, REMOVE_NOTE, UPDATE_NOTE, SELECTED_NOTE, NEW_CATEGORY, REMOVE_CATEGORY } from '../types';
 
 const handlers = {
+  [NEW_CATEGORY]: (state, action) => {
+    // console.log('reducer NEW_CATEGORY', action.note);
+    return {
+      ...state, categories: [...state.categories, {
+        category: action.category,
+        id: Date.now().toString(),
+      }],
+    };
+    // return state
+  },
+  [REMOVE_CATEGORY]: (state, action) => {
+    // console.log('reducer REMOVE_CATEGORY', action);
+    return {
+      ...state,
+      categories: state.categories.filter(item => item.id !== action.category.id),
+      notes: state.notes.filter(note => note.category !== action.category.id)
+    };
+    // return state
+  },
   [ADD_NOTE]: (state, action) => {
     // console.log('reducer add_note', action.note);
     return {
       ...state, notes: [...state.notes, {
         ...action.note,
         id: Date.now().toString(),
-        itemBackground: 'darkred',
-        category: 'all',
+        // itemBackground: 'darkred',
+        // category: 'all',
       }],
     };
     // return state

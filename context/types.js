@@ -1,4 +1,6 @@
 //NoteState
+export const NEW_CATEGORY = 'NEW_CATEGORY'
+export const REMOVE_CATEGORY = 'REMOVE_CATEGORY'
 export const ADD_NOTE = 'ADD_NOTE'
 export const UPDATE_NOTE = 'UPDATE_NOTE'
 export const REMOVE_NOTE = 'REMOVE_NOTE'

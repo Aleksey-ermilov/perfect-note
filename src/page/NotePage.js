@@ -14,7 +14,7 @@ const NotePage = ({ navigation, route }) => {
     text: '',
     // id: '',
     itemBackground: '#fff',
-    category: '',
+    category: 'all',
   });
 
   useEffect(() => {
@@ -30,11 +30,19 @@ const NotePage = ({ navigation, route }) => {
   const getColor = (color) => {
     setNote(prev => ({ ...prev, itemBackground: color }))
   }
+  const getCategory = (category) => {
+    console.log('getCategory',category);
+    setNote(prev => ({ ...prev, category: category }))
+  }
 
   return (
     <View style={{ ...styles.container, backgroundColor: note.itemBackground }}>
       <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
-        <Component getColor={getColor} />
+        <Component
+          note={note}
+          getColor={getColor}
+          getCategory={getCategory}
+        />
       </_Modal>
       <TouchableOpacity
         style={{ flex: 1 }}

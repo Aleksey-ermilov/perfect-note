@@ -1,9 +1,11 @@
+export const maxStringLength = 15
+export const sizeIconDrawer = 30
+
 export const colors = {
   mainColor: '#a100f2',
   dateColorDrawer: '#fff',
   text: '#fff',
   backgroundDrawerInactiveItem:'#bc00dd'
-
 }
 
 export const noteColors = [

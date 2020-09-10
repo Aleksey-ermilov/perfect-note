@@ -1,3 +1,10 @@
+export const categories = [
+  {category: 'all', id: 'all'},
+  {category: 'wine', id: 'wine'},
+  {category: 'game', id: 'game'},
+  {category: 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', id: 'qqqqqqqqqqqqqqqqqqqqqqqq'},
+]
+
 export const data = [
   {
     title: 'Java',

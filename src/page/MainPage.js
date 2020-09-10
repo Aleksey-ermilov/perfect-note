@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { SafeAreaView, View, Button, Text, StyleSheet, FlatList } from 'react-native';
 
 import CardNote from '../comonents/CardNote';
@@ -6,8 +6,21 @@ import _Fab from '../comonents/Fab';
 
 import { NoteContext } from '../../context/context';
 
-const MainPage = ({ navigation }) => {
+const MainPage = ({ navigation, route }) => {
   const { notes, removeNote, selectedNote } = useContext(NoteContext);
+
+  const [ notesCategory, setNotesCategory ] = useState([])
+
+  const { category } = route.params
+
+  useEffect(() => {
+    if (category === 'all'){
+      setNotesCategory(notes)
+    }else {
+      setNotesCategory( notes.filter(note => note.category === category) )
+    }
+
+  },[category,notes])
 
   const createNote = () => {
     navigation.push('NotePage')
@@ -34,9 +47,9 @@ const MainPage = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       {
-        notes.length !== 0 ?
+        notesCategory.length !== 0 ?
           <FlatList
-            data={notes}
+            data={notesCategory}
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />

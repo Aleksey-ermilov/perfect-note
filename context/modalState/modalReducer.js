@@ -1,6 +1,7 @@
-import { SHOW_MODAL, HIDDEN_MODAL,  } from '../types';
-import { Button, Text } from 'react-native';
 import React from 'react';
+import { Text } from 'react-native';
+
+import { SHOW_MODAL, HIDDEN_MODAL,  } from '../types';
 
 const handlers = {
   [SHOW_MODAL]: (state, action) => {

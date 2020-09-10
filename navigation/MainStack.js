@@ -7,6 +7,7 @@ import MainPage from '../src/page/MainPage';
 import NotePage from '../src/page/NotePage';
 
 import { ColorModal } from '../src/comonents/bodyModal/ColorModal';
+import { CategoryModal} from '../src/comonents/bodyModal/CategoriesModal';
 
 import { HeaderIcon } from '../src/comonents/HeaderIcon';
 import { DropDownMenuHeader } from '../src/comonents/DropDownMenuHeader';
@@ -16,10 +17,10 @@ import { ModalContext, NoteContext } from '../context/context';
 
 const Stack = createStackNavigator();
 
-export default function MainStack() {
+export default function MainStack({ navigation, route }) {
   const { addNote, updateNote, removeNote } = useContext(NoteContext);
   const { showModal } = useContext(ModalContext);
-
+  // console.log('MainStackProps',route.params.notes);
   return (
     <Stack.Navigator
       initialRouteName="MainPage"
@@ -32,6 +33,7 @@ export default function MainStack() {
       <Stack.Screen
         name="MainPage"
         component={MainPage}
+        initialParams={{ notes: route.params.notes, category: route.params.category }}
         options={({ navigation, route }) => {
           const menuMainPade = [
             { onPress: () => console.log('Список'), text: 'Сортировка' },
@@ -68,6 +70,11 @@ export default function MainStack() {
             { text: 'Изменить цвет', onPress: () => {
                 console.log('Изменить цвет')
                 showModal(ColorModal)
+              },
+            },
+            { text: 'Выбрать категорию', onPress: () => {
+                console.log('Выбрать категорию')
+                showModal(CategoryModal)
               },
             },
             { onPress: () => console.log('Напоминание'), text: 'Напоминание' },
