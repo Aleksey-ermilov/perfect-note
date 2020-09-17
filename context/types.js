@@ -1,3 +1,6 @@
+// OptionsAppState
+export const CHANGE_IS_SHOW_CONTENT_NOTES = 'CHANGE_IS_SHOW_CONTENT_NOTES'
+
 //NoteState
 export const NEW_CATEGORY = 'NEW_CATEGORY'
 export const REMOVE_CATEGORY = 'REMOVE_CATEGORY'

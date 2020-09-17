@@ -1,23 +1,24 @@
 import React, { useContext } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
 import { DrawerActions } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import MainPage from '../src/page/MainPage';
 import NotePage from '../src/page/NotePage';
 
-import { ColorModal } from '../src/comonents/bodyModal/ColorModal';
-import { CategoryModal} from '../src/comonents/bodyModal/CategoriesModal';
-
 import { HeaderIcon } from '../src/comonents/HeaderIcon';
 import { DropDownMenuHeader } from '../src/comonents/DropDownMenuHeader';
 
 import { colors } from '../theme';
-import { ModalContext, NoteContext } from '../context/context';
+import { ModalContext, NoteContext, OptionsAppContext } from '../context/context';
+
+import { menuMainPade } from '../src/comonents/configDropDownMenu/menuMainPage';
+import { menuNotePage } from '../src/comonents/configDropDownMenu/menuNotePage';
 
 const Stack = createStackNavigator();
 
 export default function MainStack({ navigation, route }) {
+  const { isShowContentNotes, changeIsShowContentNotes } = useContext(OptionsAppContext);
   const { addNote, updateNote, removeNote } = useContext(NoteContext);
   const { showModal } = useContext(ModalContext);
   // console.log('MainStackProps',route.params.notes);
@@ -35,11 +36,6 @@ export default function MainStack({ navigation, route }) {
         component={MainPage}
         initialParams={{ notes: route.params.notes, category: route.params.category }}
         options={({ navigation, route }) => {
-          const menuMainPade = [
-            { onPress: () => console.log('Список'), text: 'Сортировка' },
-            { onPress: () => console.log('Показать содержимое'), text: 'Показать содержимое' },
-            { onPress: () => console.log('Плитка'), text: 'Плитка' },
-          ]
           return {
             title: 'Заметки',
             headerLeft: (props) => (
@@ -53,7 +49,7 @@ export default function MainStack({ navigation, route }) {
                 <DropDownMenuHeader
                   ComponentTrigger={Item}
                   componentTriggerProps={{ title: 'menu', iconName: 'md-more' }}
-                  menuOptions={menuMainPade}
+                  menuOptions={menuMainPade(isShowContentNotes, changeIsShowContentNotes)}
                 />
               </HeaderButtons>
             ),
@@ -65,32 +61,6 @@ export default function MainStack({ navigation, route }) {
         name="NotePage"
         component={NotePage}
         options={({ navigation, route }) => {
-          const menuNotePade = [
-            { onPress: () => console.log('Список'), text: 'Список' },
-            { text: 'Изменить цвет', onPress: () => {
-                console.log('Изменить цвет')
-                showModal(ColorModal)
-              },
-            },
-            { text: 'Выбрать категорию', onPress: () => {
-                console.log('Выбрать категорию')
-                showModal(CategoryModal)
-              },
-            },
-            { onPress: () => console.log('Напоминание'), text: 'Напоминание' },
-            { onPress: () => console.log('Добавить изображение'), text: 'Добавить изображение' },
-            {
-              text: 'Удалить', onPress: () => {
-                const note = route.params.note;
-                if (note.id) {
-                  navigation.goBack();
-                  removeNote(note);
-                } else {
-                  navigation.goBack();
-                }
-              },
-            },
-          ];
           return ({
             title: 'Редактировать/Создать',
             headerRight: (props) => (
@@ -109,7 +79,7 @@ export default function MainStack({ navigation, route }) {
                 <DropDownMenuHeader
                   ComponentTrigger={Item}
                   componentTriggerProps={{ title: 'menu', iconName: 'md-more' }}
-                  menuOptions={menuNotePade}
+                  menuOptions={menuNotePage(showModal, removeNote, route, navigation)}
                 />
               </HeaderButtons>
             ),

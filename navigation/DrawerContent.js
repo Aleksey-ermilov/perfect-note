@@ -9,16 +9,16 @@ import { enUS, ru } from 'date-fns/locale';
 
 import { NoteContext } from '../context/context';
 
-import { colors, sizeIconDrawer } from '../theme';
+import { colors, sizeIconDrawer, dateLocale } from '../theme';
 import { trimString } from '../helpers';
 
 import { _Modal } from '../src/comonents/Modal';
 import { NewCategoryModal } from '../src/comonents/bodyModal/NewCategoryModal';
 
-const dateLocale = {
-  ru: ru,
-  en: enUS,
-};
+// const dateLocale = {
+//   ru: ru,
+//   en: enUS,
+// };
 
 export const CustomDrawerContent = (props) => {
   const { categories, newCategory, removeCategory } = useContext(NoteContext);

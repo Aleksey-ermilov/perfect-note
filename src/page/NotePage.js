@@ -15,6 +15,7 @@ const NotePage = ({ navigation, route }) => {
     // id: '',
     itemBackground: '#fff',
     category: 'all',
+    date: new Date()
   });
 
   useEffect(() => {

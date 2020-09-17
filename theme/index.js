@@ -1,5 +1,12 @@
+import { enUS, ru } from 'date-fns/locale';
+
 export const maxStringLength = 15
 export const sizeIconDrawer = 30
+
+export const dateLocale = {
+  ru: ru,
+  en: enUS,
+};
 
 export const colors = {
   mainColor: '#a100f2',
