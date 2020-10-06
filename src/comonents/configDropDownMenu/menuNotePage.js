@@ -1,22 +1,23 @@
-import { ColorModal } from '../bodyModal/ColorModal';
-import { CategoryModal } from '../bodyModal/CategoriesModal';
-
 import { TextMenu } from './ComponentsHelpers';
 
-export const menuNotePage = (showModal, removeNote, route, navigation) => {
+export const menuNotePage = (showModal, removeNote, route, navigation, typeNote, changeTypeNote) => {
 
   return [
-    { onPress: () => console.log('Список'), children: TextMenu('Список') },
+    { children: TextMenu('Список'),onPress: () => {
+        console.log('Список')
+        changeTypeNote(typeNote === 'list' ? 'text' : 'list')
+      },
+    },
     {
       children: TextMenu('Изменить цвет'), onPress: () => {
         console.log('Изменить цвет');
-        showModal(ColorModal);
+        showModal('ColorModal');
       },
     },
     {
       children: TextMenu('Выбрать категорию'), onPress: () => {
         console.log('Выбрать категорию');
-        showModal(CategoryModal);
+        showModal('CategoryModal');
       },
     },
     { onPress: () => console.log('Напоминание'), children: TextMenu('Напоминание') },

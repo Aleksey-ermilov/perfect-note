@@ -9,7 +9,7 @@ import { Button, Text } from 'react-native';
 export const ModalState = ({ children }) => {
   const initialState = {
     isVisibleModal: false,
-    Component: () =>  <> <Text>Example Modal</Text> </>
+    Component: ''
   }
   const [state, dispatch] = useReducer(modalReducer, initialState)
 

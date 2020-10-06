@@ -153,7 +153,7 @@ export const CustomDrawerContent = (props) => {
           )
         }
         <DrawerItem
-          label="new category"
+          label="Новая категория"
           onPress={() => {
             setIsModal(true);
           }}

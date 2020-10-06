@@ -4,10 +4,11 @@ import { SafeAreaView, View, Button, Text, StyleSheet, FlatList } from 'react-na
 import CardNote from '../comonents/CardNote';
 import _Fab from '../comonents/Fab';
 
-import { NoteContext } from '../../context/context';
+import { NoteContext, OptionsAppContext } from '../../context/context';
 
 const MainPage = ({ navigation, route }) => {
   const { notes, removeNote, selectedNote } = useContext(NoteContext);
+  const { changeTypeNote } = useContext(OptionsAppContext);
 
   const [ notesCategory, setNotesCategory ] = useState([])
 
@@ -22,11 +23,14 @@ const MainPage = ({ navigation, route }) => {
 
   },[category,notes])
 
-  const createNote = () => {
-    navigation.push('NotePage')
+  const createNote = (type) => {
+    console.log('type new note', type)
+    changeTypeNote(type)
+    navigation.push('NotePage', { type })
   }
   const pressCard = (note) => {
-    selectedNote(note)
+    // selectedNote(note)
+    changeTypeNote(note.type)
     navigation.push('NotePage', { note })
   };
   const pressLongCard = (note) => {

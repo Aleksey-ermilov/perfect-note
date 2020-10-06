@@ -18,9 +18,9 @@ export const _Fab = ({ navigation, createNote }) => {
               accessibilityLabel: '111',
               icon: 'pencil',
               onPress: () => {
-                console.log('text note');
+                // console.log('text note');
                 // navigation.push('NotePage');
-                createNote()
+                createNote('text')
               },
               color: colors.text,
               style: styles.itemFab,
@@ -28,8 +28,8 @@ export const _Fab = ({ navigation, createNote }) => {
             {
               icon: 'check-box-multiple-outline',
               onPress: () => {
-                console.log('Check list');
-                createNote()
+                // console.log('Check list');
+                createNote('list')
                 // navigation.push('NotePage');
               },
               color: colors.text,

@@ -1,17 +1,39 @@
 import React, { useContext } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph, Text, TouchableRipple, Caption } from 'react-native-paper';
+import { FlatList, StyleSheet, View } from 'react-native';
+import { Title, Text, TouchableRipple, Caption, } from 'react-native-paper';
 
 import { format } from 'date-fns';
 
 import { dateLocale } from '../../theme';
 import { OptionsAppContext } from '../../context/context';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const CardNote = ({ note, onPress, onLongPress }) => {
   const { isShowContentNotes } = useContext(OptionsAppContext);
+  console.log(note.type,'1111');
+  const renderItem = ({ item }) => {
+    // check-box-outline        полный
+    // checkbox-blank-outline   пустой
+    return (
+      <View key={item.id}
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              padding: 5,
+              alignItems: 'center',
+            }}
+      >
+        <Icon
+          name={item.completed ? 'check-box-outline' : 'checkbox-blank-outline'}
+          color={'#000'}
+          size={24}
+        />
+        <Text style={{paddingHorizontal:5}}>{item.content}</Text>
+      </View>
+    );
+  };
 
-  // let q = str.split('\n').slice(0,3).map(item => item.trim())
-  let text = note.text.split('\n').slice(0,3)//.map(item => item.trim())
+  let text = note.text.map(item => item.content).join('\n');
 
   return (
     <TouchableRipple
@@ -28,9 +50,20 @@ const CardNote = ({ note, onPress, onLongPress }) => {
     >
       <View>
         <Title>{note.title}</Title>
-        { isShowContentNotes &&
-          // <Paragraph>{note.text}</Paragraph>
-          <Paragraph>{text}</Paragraph>
+        {isShowContentNotes &&
+
+        <>
+          {
+            note.type === 'text' ?
+              <Text>{text}</Text>
+              :
+              <FlatList
+                data={note.text}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+              />
+          }
+        </>
         }
         <View style={{
           flexDirection: 'row',
@@ -42,26 +75,6 @@ const CardNote = ({ note, onPress, onLongPress }) => {
         </View>
       </View>
     </TouchableRipple>
-
-
-    // <Card
-    //   style={{
-    //     margin: 5,
-    //     backgroundColor: note.itemBackground
-    //   }}
-    //   onPress={() => onPress(note) }
-    //   onLongPress={() => onLongPress(note) }
-    // >
-    //   <Card.Title title={note.title}/>
-    //   <Card.Content>
-    //     <Paragraph>{note.text}</Paragraph>
-    //   </Card.Content>
-    //
-    //   {/*<Card.Actions>*/}
-    //   {/*  <Button>Cancel</Button>*/}
-    //   {/*  <Button>Ok</Button>*/}
-    //   {/*</Card.Actions>*/}
-    // </Card>
   );
 };
 

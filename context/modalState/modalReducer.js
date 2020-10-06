@@ -17,7 +17,7 @@ const handlers = {
     return {
       ...state,
       isVisibleModal: false,
-      Component: () =>  <> <Text>Example Modal</Text> </>
+      Component: ''
     };
   },
   DEFAULT: state => state,

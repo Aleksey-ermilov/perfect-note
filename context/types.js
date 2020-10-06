@@ -1,5 +1,6 @@
 // OptionsAppState
 export const CHANGE_IS_SHOW_CONTENT_NOTES = 'CHANGE_IS_SHOW_CONTENT_NOTES'
+export const CHANGE_TYPE_NOTE = 'CHANGE_TYPE_NOTE'
 
 //NoteState
 export const NEW_CATEGORY = 'NEW_CATEGORY'

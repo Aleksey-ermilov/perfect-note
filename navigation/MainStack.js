@@ -18,7 +18,7 @@ import { menuNotePage } from '../src/comonents/configDropDownMenu/menuNotePage';
 const Stack = createStackNavigator();
 
 export default function MainStack({ navigation, route }) {
-  const { isShowContentNotes, changeIsShowContentNotes } = useContext(OptionsAppContext);
+  const { isShowContentNotes, changeIsShowContentNotes, typeNote, changeTypeNote } = useContext(OptionsAppContext);
   const { addNote, updateNote, removeNote } = useContext(NoteContext);
   const { showModal } = useContext(ModalContext);
   // console.log('MainStackProps',route.params.notes);
@@ -79,7 +79,7 @@ export default function MainStack({ navigation, route }) {
                 <DropDownMenuHeader
                   ComponentTrigger={Item}
                   componentTriggerProps={{ title: 'menu', iconName: 'md-more' }}
-                  menuOptions={menuNotePage(showModal, removeNote, route, navigation)}
+                  menuOptions={menuNotePage(showModal, removeNote, route, navigation, typeNote, changeTypeNote)}
                 />
               </HeaderButtons>
             ),
