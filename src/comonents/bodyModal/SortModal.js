@@ -1,41 +1,38 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { RadioButton } from 'react-native-paper';
 
-import { ModalContext, NoteContext } from '../../../context/context';
-
 import { _Button } from '../Button';
-import { trimString } from '../../../helpers';
 
-export const CategoryModal = ({ getCategory, note }) => {
+import { colors, sortArray } from '../../../theme';
+
+import { ModalContext } from '../../../context/context';
+
+export const SortModal = ({ getSort,sort }) => {
   const { hiddenModal } = useContext(ModalContext);
-  const { categories } = useContext(NoteContext);
 
-  const [value, setValue] = useState( () => {
-    if (note){
-      return note.category
-    }
-  });
+  const [value, setValue] = useState(sort);
 
-  const selectedCategory = (category) => {
-    getCategory(category);
+  const selectedCategory = (sort) => {
+    getSort(sort);
   };
 
-  const renderItem = ({ item }) => <RadioButton.Item label={trimString(item.category)} value={item.id}/>;
+  const renderItem = ({ item }) => <RadioButton.Item label={item.content} value={item.id}/>;
 
   return (
     <View style={styles.container}>
       {/* Высота flatList */}
-      <View style={{ height: 210 }}>
+      <View style={{ height: 150 }}>
         <RadioButton.Group
           onValueChange={value => {
-            setValue(value);
+            // setValue(value);
             selectedCategory(value);
           }}
-          value={value}
+          // value={value}
+          value={sort}
         >
           <FlatList
-            data={categories}
+            data={sortArray}
             renderItem={renderItem}
             keyExtractor={item => item.id}
           />
@@ -45,10 +42,18 @@ export const CategoryModal = ({ getCategory, note }) => {
       <_Button onPress={() => hiddenModal()} title={'Закрыть'}/>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     width: 300,
   },
+  text: {
+    borderColor: colors.mainColor,
+    borderWidth:1,
+    borderRadius:10,
+    margin:5,
+    padding:10,
+    fontSize:16,
+  }
 });

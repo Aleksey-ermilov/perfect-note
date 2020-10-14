@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const CardNote = ({ note, onPress, onLongPress }) => {
   const { isShowContentNotes } = useContext(OptionsAppContext);
-  console.log(note.type,'1111');
+
   const renderItem = ({ item }) => {
     // check-box-outline        полный
     // checkbox-blank-outline   пустой

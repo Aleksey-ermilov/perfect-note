@@ -8,6 +8,12 @@ export const dateLocale = {
   en: enUS,
 };
 
+export const sortArray = [
+  {content: 'АБВ', id: 'ABC'},
+  {content: 'ЯЮЭ', id: 'ZYX'},
+  {content: 'По дате', id: 'date'},
+]
+
 export const colors = {
   mainColor: '#a100f2',
   dateColorDrawer: '#fff',

@@ -25,7 +25,7 @@ export const data = [
     id: '1',
     itemBackground: 'lightgreen',
     category: 'all',
-    date: new Date(),
+    date: Date.parse('01 Jan 1970 00:00:00 GMT'),
     type: 'list',
   },
   {
@@ -42,7 +42,7 @@ export const data = [
     id: '2',
     itemBackground: 'lightblue',
     category: 'all',
-    date: new Date(),
+    date: Date.parse('04 Dec 1995 00:12:00 GMT'),
     type: 'text',
   },
   {
@@ -64,7 +64,7 @@ export const data = [
     id: '4',
     itemBackground: 'lightgray',
     category: 'game',
-    date: new Date(),
+    date: Date.parse('04 Dec 2005 00:12:00 GMT'),
     type: 'text',
   },
 ];

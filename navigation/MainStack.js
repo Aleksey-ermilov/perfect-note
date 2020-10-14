@@ -49,7 +49,7 @@ export default function MainStack({ navigation, route }) {
                 <DropDownMenuHeader
                   ComponentTrigger={Item}
                   componentTriggerProps={{ title: 'menu', iconName: 'md-more' }}
-                  menuOptions={menuMainPade(isShowContentNotes, changeIsShowContentNotes)}
+                  menuOptions={menuMainPade(showModal, isShowContentNotes, changeIsShowContentNotes)}
                 />
               </HeaderButtons>
             ),

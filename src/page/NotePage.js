@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, StyleSheet, TextInput, Keyboard, TouchableOpacity, ScrollView } from 'react-native';
-import { Divider, Checkbox, Text } from 'react-native-paper';
+import { Divider, Text } from 'react-native-paper';
 
 import { _Modal } from '../comonents/Modal';
 import { ColorModal } from '../comonents/bodyModal/ColorModal';
 import { CategoryModal } from '../comonents/bodyModal/CategoriesModal';
 
 import { ModalContext, OptionsAppContext } from '../../context/context';
-import { MenuOption } from 'react-native-popup-menu';
 
 import { CheckBox } from '../comonents/CheckBox';
 
