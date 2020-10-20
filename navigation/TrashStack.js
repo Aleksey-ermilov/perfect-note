@@ -1,15 +1,25 @@
 import * as React from 'react';
+import { DrawerActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { colors } from '../theme';
-import TrashPage from '../src/page/TrashPage';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons/index';
 import { HeaderIcon } from '../src/comonents/HeaderIcon';
-import { DrawerActions } from '@react-navigation/native';
+
+import { colors } from '../theme';
+
+import TrashPage from '../src/page/TrashPage';
+
+import { menuTrashPade } from '../src/comonents/configDropDownMenu/menuTrashPade';
+
 import { DropDownMenuHeader } from '../src/comonents/DropDownMenuHeader';
+import { useContext } from 'react';
+import { NoteContext, OptionsAppContext } from '../context/context';
 
 const Stack = createStackNavigator();
 
 export default function AboutStack() {
+  const { isShowContentNotes, changeIsShowContentNotes, } = useContext(OptionsAppContext);
+  const { removeAllTrash } = useContext(NoteContext);
+
   return (
     <Stack.Navigator
       initialRouteName="TrashPage"
@@ -23,10 +33,6 @@ export default function AboutStack() {
         name="TrashPage"
         component={TrashPage}
         options={({ navigation, route }) => {
-          const menuMainPade = [
-            { onPress: () => console.log('Показать содержимое'), text: 'Показать содержимое' },
-            { onPress: () => console.log('Очистить'), text: 'Очистить' },
-          ]
           return {
             title: 'Корзина',
             headerLeft: (props) => (
@@ -40,7 +46,7 @@ export default function AboutStack() {
                 <DropDownMenuHeader
                   ComponentTrigger={Item}
                   componentTriggerProps={{ title: 'menu', iconName: 'md-more' }}
-                  menuOptions={menuMainPade}
+                  menuOptions={menuTrashPade(isShowContentNotes, changeIsShowContentNotes, removeAllTrash)}
                 />
               </HeaderButtons>
             ),

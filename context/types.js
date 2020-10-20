@@ -9,6 +9,10 @@ export const ADD_NOTE = 'ADD_NOTE'
 export const UPDATE_NOTE = 'UPDATE_NOTE'
 export const REMOVE_NOTE = 'REMOVE_NOTE'
 export const SELECTED_NOTE = 'SELECTED_NOTE'
+export const ADD_TRASH = 'ADD_TRASH'
+export const REMOVE_TRASH = 'REMOVE_TRASH'
+export const REMOVE_ALL_TRASH = 'REMOVE_ALL_TRASH'
+export const REESTABLISH_TRASH = 'REESTABLISH_TRASH'
 
 //ModalState
 export const SHOW_MODAL = 'SHOW_MODAL'

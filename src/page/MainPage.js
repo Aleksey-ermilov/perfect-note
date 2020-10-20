@@ -11,9 +11,10 @@ import { ModalContext, NoteContext, OptionsAppContext } from '../../context/cont
 
 import { compareNotes } from '../../helpers';
 import { sortArray } from '../../theme';
+import { Menu, MenuOption, MenuOptions, MenuTrigger, renderers } from 'react-native-popup-menu';
 
 const MainPage = ({ navigation, route }) => {
-  const { notes, removeNote } = useContext(NoteContext);
+  const { notes, addTrash } = useContext(NoteContext);
   const { changeTypeNote } = useContext(OptionsAppContext);
   const { isVisibleModal, Component, hiddenModal } = useContext(ModalContext);
 
@@ -48,22 +49,37 @@ const MainPage = ({ navigation, route }) => {
     navigation.push('NotePage', { type })
   }
   const pressCard = (note) => {
-    // selectedNote(note)
     changeTypeNote(note.type)
     navigation.push('NotePage', { note })
   };
-  const pressLongCard = (note) => {
-    removeNote(note)
-  };
+ /* const pressLongCard = (note) => {
+    // removeNote(note)
+    addTrash(note)
+  };*/
 
   const renderItem = ({ item }) => {
+    let menu
     return (
-      <CardNote
-        onPress={pressCard}
-        onLongPress={pressLongCard}
-        note={item}
-        key={item.id}
-      />
+      // <CardNote
+      //   onPress={pressCard}
+      //   onLongPress={pressLongCard}
+      //   note={item}
+      //   key={item.id}
+      // />
+      <Menu renderer={renderers.Popover}  ref={c => menu = c } >
+        <MenuTrigger triggerOnLongPress={true}  >
+          <CardNote
+            onPress={pressCard}
+            onLongPress={(note) => menu.open() }
+            note={item}
+            key={item.id}
+          />
+        </MenuTrigger>
+        <MenuOptions customStyles={optionsStyles}>
+          <MenuOption text="Установить пароль" onSelect={() => console.log(item.title)} />
+          <MenuOption text="Добавить в корзину" onSelect={() => addTrash(item)} />
+        </MenuOptions>
+      </Menu>
       )
   }
 
@@ -107,4 +123,17 @@ const styles = StyleSheet.create({
 
 export default MainPage;
 
+const optionsStyles = {
+  optionsContainer: {
+    // padding:10
+  },
+  optionsWrapper: {},
+  optionWrapper: {
+    margin: 5,
+  },
+  optionTouchable: {},
+  optionText: {
+    fontSize:16
 
+  },
+};

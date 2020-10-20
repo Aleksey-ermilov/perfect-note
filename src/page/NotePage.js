@@ -32,7 +32,7 @@ const NotePage = ({ navigation, route }) => {
   }, []);
 
   useEffect(() => {
-    navigation.setParams({ note });
+    navigation.setParams({ note });  //setOptions
   }, [note]);
   useEffect(() => {
     setNote(prev => ({ ...prev, type: typeNote }));

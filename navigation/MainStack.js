@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { DrawerActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { HeaderIcon } from '../src/comonents/HeaderIcon';
 
 import MainPage from '../src/page/MainPage';
 import NotePage from '../src/page/NotePage';
 
-import { HeaderIcon } from '../src/comonents/HeaderIcon';
 import { DropDownMenuHeader } from '../src/comonents/DropDownMenuHeader';
 
 import { colors } from '../theme';
@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 
 export default function MainStack({ navigation, route }) {
   const { isShowContentNotes, changeIsShowContentNotes, typeNote, changeTypeNote } = useContext(OptionsAppContext);
-  const { addNote, updateNote, removeNote } = useContext(NoteContext);
+  const { addNote, updateNote, removeNote, addTrash } = useContext(NoteContext);
   const { showModal } = useContext(ModalContext);
   // console.log('MainStackProps',route.params.notes);
   return (
@@ -79,7 +79,7 @@ export default function MainStack({ navigation, route }) {
                 <DropDownMenuHeader
                   ComponentTrigger={Item}
                   componentTriggerProps={{ title: 'menu', iconName: 'md-more' }}
-                  menuOptions={menuNotePage(showModal, removeNote, route, navigation, typeNote, changeTypeNote)}
+                  menuOptions={menuNotePage(showModal, addTrash, route, navigation, typeNote, changeTypeNote)}
                 />
               </HeaderButtons>
             ),
