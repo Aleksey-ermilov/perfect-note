@@ -10,9 +10,11 @@ import { ModalContext, OptionsAppContext } from '../../context/context';
 
 import { CheckBox } from '../comonents/CheckBox';
 
+import { noteColors } from '../../theme';
+
 const NotePage = ({ navigation, route }) => {
   const { isVisibleModal, Component, hiddenModal } = useContext(ModalContext);
-  const { typeNote } = useContext(OptionsAppContext);
+  const { typeNote, appColor, fontFamily, fontSize } = useContext(OptionsAppContext);
 
   const [note, setNote] = useState({
     title: '',
@@ -20,19 +22,23 @@ const NotePage = ({ navigation, route }) => {
     // id: '',
     itemBackground: '#fff',
     category: 'all',
-    date: new Date(),
+    date: new Date().toString(),
     // type: route.params.type,
     type: typeNote,
+    password:'',
   });
 
   useEffect(() => {
     if (route.params.note) {
+      navigation.setOptions({ title: 'Редактировать' })
       setNote(route.params.note);
+    }else{
+      setNote( prev => ({ ...prev, category: route.params.category }));
     }
   }, []);
 
   useEffect(() => {
-    navigation.setParams({ note });  //setOptions
+    navigation.setParams({ note });
   }, [note]);
   useEffect(() => {
     setNote(prev => ({ ...prev, type: typeNote }));
@@ -40,10 +46,18 @@ const NotePage = ({ navigation, route }) => {
 
   const selectorModal = () => {
     if (Component === 'ColorModal') {
-      return <ColorModal note={note} getColor={getColor}/>;
+      return(
+        <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
+          <ColorModal getColor={getColor} listColors={noteColors}/>
+        </_Modal>
+      );
     }
     if (Component === 'CategoryModal') {
-      return <CategoryModal note={note} getCategory={getCategory}/>;
+      return (
+        <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
+          <CategoryModal note={note} getCategory={getCategory}/>
+        </_Modal>
+      );
     }
   };
 
@@ -60,9 +74,6 @@ const NotePage = ({ navigation, route }) => {
     setNote(prev => ({ ...prev, text: str }));
   };
   const handlerOnChangeTextTypeList = (text, id) => {
-    // const changedItem = note.text.find( (item,index ) => (index + 1) === id )
-    // setNote(prev => ({ ...prev, text: [...prev.text.slice(0,id-1), { ...changedItem, content: text }, ...prev.text.slice(id) ] }) )
-
     setNote(prev => ({
       ...prev,
       text: [
@@ -74,27 +85,9 @@ const NotePage = ({ navigation, route }) => {
         })
       ]
     }) )
-
-    // setNote(prev => {
-    //     prev.text.map(item => {
-    //       if (item.id === id) {
-    //         item.content = text;
-    //       }
-    //       return item;
-    //     });
-    //     return prev;
-    //   },
-    // );
   };
 
   const handlerChecked = (id) => {
-    // const changedItem = note.text.find( (item,index ) => (index + 1) === id )
-    // setNote(prev => ({
-    //   ...prev,
-    //   text: [
-    //     ...prev.text.slice(0,id-1), { ...changedItem, completed: !changedItem.completed }, ...prev.text.slice(id)
-    //   ]
-    // }) )
     console.log(id, 'id');
     setNote(prev => ({
       ...prev,
@@ -109,13 +102,6 @@ const NotePage = ({ navigation, route }) => {
     }) )
 }
 const handlerRemoveCheckBox = id => {
-  // setNote(prev => ({
-  //   ...prev,
-  //   text: [
-  //     ...prev.text.filter( (item, index) => index !== id )
-  //   ]
-  // }) )
-
   setNote(prev => ({
     ...prev,
     text: [
@@ -134,16 +120,13 @@ const handlerAddCheckBox = () => {
   }
 };
 
-// console.log('note.text.split(\'\\n\')', note.text.split('\n').map(item => item.trim()));
-// console.log('note',note);
-console.log('type note', typeNote);
 let text = note.text.map(item => item.content).join('\n');
 
 return (
   <View style={{ ...styles.container, backgroundColor: note.itemBackground }}>
-    <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
-      {selectorModal()}
-    </_Modal>
+
+    {selectorModal()}
+
     <TouchableOpacity
       style={{ flex: 1 }}
       activeOpacity={1}
@@ -154,16 +137,16 @@ return (
         onChangeText={text => setNote(prev => ({ ...prev, title: text }))}
         placeholder={'Заголовок'}
         multiline={true}
-        style={{ ...styles.titleInput, backgroundColor: note.itemBackground }}
+        style={{ ...styles.titleInput, backgroundColor: note.itemBackground, fontFamily: fontFamily.id, fontSize: (+fontSize.id + 6) }}
       />
-      <Divider/>
+      <Divider style={{ backgroundColor: appColor }}/>
       {note.type === 'text' ?
         <TextInput
           value={text}
           onChangeText={text => handlerOnChangeTextTypeText(text)}
           placeholder={'Заметка...'}
           multiline={true}
-          style={{ ...styles.textInput, backgroundColor: note.itemBackground }}
+          style={{ ...styles.textInput, backgroundColor: note.itemBackground, fontFamily: fontFamily.id, fontSize: +fontSize.id }}
           autoFocus={true}
         />
         :

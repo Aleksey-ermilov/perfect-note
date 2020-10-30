@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { DrawerActions } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons/index';
@@ -11,20 +11,20 @@ import TrashPage from '../src/page/TrashPage';
 import { menuTrashPade } from '../src/comonents/configDropDownMenu/menuTrashPade';
 
 import { DropDownMenuHeader } from '../src/comonents/DropDownMenuHeader';
-import { useContext } from 'react';
+
 import { NoteContext, OptionsAppContext } from '../context/context';
 
 const Stack = createStackNavigator();
 
 export default function AboutStack() {
-  const { isShowContentNotes, changeIsShowContentNotes, } = useContext(OptionsAppContext);
+  const { isShowContentNotes, changeIsShowContentNotes, appColor } = useContext(OptionsAppContext);
   const { removeAllTrash } = useContext(NoteContext);
 
   return (
     <Stack.Navigator
       initialRouteName="TrashPage"
       screenOptions={{
-        headerStyle: { backgroundColor: colors.mainColor },
+        headerStyle: { backgroundColor: appColor },
         headerTintColor: colors.text,
         headerTitleStyle: { fontWeight: 'bold' },
       }}

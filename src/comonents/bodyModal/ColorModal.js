@@ -5,10 +5,9 @@ import { ModalContext } from '../../../context/context';
 
 import { ColorBox } from '../ColorBox';
 
-import { noteColors } from '../../../theme';
 import { _Button } from '../Button';
 
-export const ColorModal = ({ getColor }) => {
+export const ColorModal = ({ getColor, listColors }) => {
   const { hiddenModal } = useContext(ModalContext);
 
   const selectedColor = (color) => {
@@ -20,7 +19,7 @@ export const ColorModal = ({ getColor }) => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={noteColors}
+        data={listColors}
         renderItem={renderItem}
         keyExtractor={item => item.color}
         numColumns={3}

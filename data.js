@@ -25,8 +25,9 @@ export const data = [
     id: '1',
     itemBackground: 'lightgreen',
     category: 'all',
-    date: Date.parse('01 Jan 1970 00:00:00 GMT'),
+    date: new Date('01 Jan 1970 00:00:00 GMT').toString(),
     type: 'list',
+    password:'',
   },
   {
     title: 'React native',
@@ -42,8 +43,9 @@ export const data = [
     id: '2',
     itemBackground: 'lightblue',
     category: 'all',
-    date: Date.parse('04 Dec 1995 00:12:00 GMT'),
+    date: new Date('04 Dec 1995 00:12:00 GMT').toString(),
     type: 'text',
+    password:'',
   },
   {
     title: 'Angular',
@@ -53,8 +55,9 @@ export const data = [
     id: '3',
     itemBackground: 'white',
     category: 'wine',
-    date: new Date(),
+    date: new Date().toString(),
     type: 'text',
+    password:'',
   },
   {
     title: 'NodeJS',
@@ -64,7 +67,8 @@ export const data = [
     id: '4',
     itemBackground: 'lightgray',
     category: 'game',
-    date: Date.parse('04 Dec 2005 00:12:00 GMT'),
+    date: new Date('04 Dec 2005 00:12:00 GMT').toString(),
     type: 'text',
+    password:'',
   },
 ];

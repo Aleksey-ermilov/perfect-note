@@ -5,15 +5,19 @@ import { colors } from '../theme';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons/index';
 import { HeaderIcon } from '../src/comonents/HeaderIcon';
 import { DrawerActions } from '@react-navigation/native';
+import { useContext } from 'react';
+import { OptionsAppContext } from '../context/context';
 
 const Stack = createStackNavigator();
 
 export default function AboutStack() {
+  const { appColor } = useContext(OptionsAppContext);
+
   return (
     <Stack.Navigator
       initialRouteName="AboutPage"
       screenOptions={{
-        headerStyle: { backgroundColor: colors.mainColor },
+        headerStyle: { backgroundColor: appColor },
         headerTintColor: colors.text,
         headerTitleStyle: { fontWeight: 'bold' },
       }}

@@ -5,8 +5,10 @@ import { Divider, Checkbox, Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { sizeIconDrawer, colors } from '../../theme';
+import { OptionsAppContext } from '../../context/context';
 
 export const CheckBox = ({ note, onChangeText, onChecked, removeCheckBox, addCheckBox }) => {
+  const { appColor, fontFamily, fontSize } = useContext(OptionsAppContext);
 
   const notCompleted = note.text.filter(item => item.completed === false)
   const yesCompleted = note.text.filter(item => item.completed === true)
@@ -25,6 +27,7 @@ export const CheckBox = ({ note, onChangeText, onChecked, removeCheckBox, addChe
         <Checkbox
           status={item.completed ? 'checked' : 'unchecked'}
           onPress={() => onChecked( item.id )}
+          color={appColor}
         />
         <View style={{ flex: 1 }}>
           <TextInput
@@ -35,7 +38,9 @@ export const CheckBox = ({ note, onChangeText, onChecked, removeCheckBox, addChe
             style={{
               ...styles.textInput,
               backgroundColor: note.itemBackground,
-              textDecorationLine: item.completed ? 'line-through' : 'none'
+              textDecorationLine: item.completed ? 'line-through' : 'none',
+              fontFamily: fontFamily.id,
+              fontSize: +fontSize.id
             }}
           />
         </View>
@@ -62,7 +67,7 @@ export const CheckBox = ({ note, onChangeText, onChecked, removeCheckBox, addChe
         keyExtractor={item => item.id}
       />
 
-      { yesCompleted.length >= 1 && <Divider style={{ marginHorizontal: 10, backgroundColor: colors.mainColor }}/>}
+      { yesCompleted.length >= 1 && <Divider style={{ marginHorizontal: 10, backgroundColor: appColor }}/>}
 
       <FlatList
         data={yesCompleted}
@@ -92,7 +97,6 @@ export const CheckBox = ({ note, onChangeText, onChecked, removeCheckBox, addChe
 
 const styles = StyleSheet.create({
   textInput: {
-    fontSize: 16,
     padding: 5,
   },
 });

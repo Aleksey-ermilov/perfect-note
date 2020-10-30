@@ -5,7 +5,6 @@ import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navi
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { format } from 'date-fns';
-import { enUS, ru } from 'date-fns/locale';
 
 import { NoteContext } from '../context/context';
 
@@ -14,11 +13,6 @@ import { trimString } from '../helpers';
 
 import { _Modal } from '../src/comonents/Modal';
 import { NewCategoryModal } from '../src/comonents/bodyModal/NewCategoryModal';
-
-// const dateLocale = {
-//   ru: ru,
-//   en: enUS,
-// };
 
 export const CustomDrawerContent = (props) => {
   const { categories, newCategory, removeCategory } = useContext(NoteContext);
@@ -34,7 +28,7 @@ export const CustomDrawerContent = (props) => {
     // removeCategory(item)
     Alert.alert(
       "Удаление Категории",
-      "Если Вы удалите категорию, то всё записи так же будут удалены",
+      "Если Вы удалите категорию, то всё записи будут добавлены корзину",
       [
         {
           text: "Отмеа",
@@ -201,6 +195,23 @@ export const CustomDrawerContent = (props) => {
           )}
           {...props}
         />
+        <DrawerItem
+          label='Настройки'
+          onPress={() => {
+            setFocus('OptionsStack');
+            props.navigation.navigate('OptionsStack', { screen: 'OptionsPage' });
+          }}
+          focused={focus === 'OptionsStack' ? true : false}
+          icon={({ color, size }) => (
+            <Icon
+              name="settings"
+              color={color}
+              size={30}
+            />
+          )}
+          {...props}
+        />
+
       </Drawer.Section>
 
 

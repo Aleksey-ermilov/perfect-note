@@ -1,4 +1,10 @@
-import { CHANGE_IS_SHOW_CONTENT_NOTES, CHANGE_TYPE_NOTE } from '../types';
+import {
+  CHANGE_IS_SHOW_CONTENT_NOTES,
+  CHANGE_TYPE_NOTE,
+  SET_APP_COLOR,
+  SET_FONT_FAMILY,
+  SET_FONT_SIZE,
+} from '../types';
 
 const handlers = {
   [CHANGE_IS_SHOW_CONTENT_NOTES]: (state, action) => {
@@ -10,14 +16,29 @@ const handlers = {
   },
   [CHANGE_TYPE_NOTE]: (state, action) => {
     // console.log('reducer CHANGE_TYPE_NOTE');
-    // if (state.typeNote === 'list'){
-    //   return { ...state, typeNote: 'text' }
-    // }
-    // if (state.typeNote === 'text'){
-    //   return { ...state, typeNote: 'list' }
-    // }
     return {
       ...state, typeNote: action.typeNote
+    };
+    // return state
+  },
+  [SET_APP_COLOR]: (state, action) => {
+    // console.log('reducer SET_APP_COLOR');
+    return {
+      ...state, appColor: action.color
+    };
+    // return state
+  },
+  [SET_FONT_FAMILY]: (state, action) => {
+    // console.log('reducer SET_APP_COLOR');
+    return {
+      ...state, fontFamily: action.fontFamily
+    };
+    // return state
+  },
+  [SET_FONT_SIZE]: (state, action) => {
+    // console.log('reducer SET_APP_COLOR');
+    return {
+      ...state, fontSize: action.fontSize
     };
     // return state
   },

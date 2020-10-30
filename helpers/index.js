@@ -1,6 +1,5 @@
-import { maxStringLength } from '../theme';
 
-export const trimString = text => {
+export const trimString = (text, maxStringLength = 15) => {
   if (text.length > maxStringLength){
     return `${text.substring(0,maxStringLength)}...`
   }

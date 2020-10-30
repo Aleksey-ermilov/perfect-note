@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
 
 import { _Button } from '../Button';
 
 import { colors } from '../../../theme';
+import { OptionsAppContext } from '../../../context/context';
 
 export const NewCategoryModal = ({ hiddenModal, getText }) => {
+  const { appColor } = useContext(OptionsAppContext);
+
   const [ value, setValue ] = useState('')
 
   const handlerButton = () => {
@@ -18,7 +21,7 @@ export const NewCategoryModal = ({ hiddenModal, getText }) => {
       <TextInput
         value={value}
         onChangeText={ text => setValue(text)}
-        style={styles.text}
+        style={{ ...styles.text, borderColor: appColor }}
         autoFocus={true}
         placeholder={'Категория...'}
       />
@@ -32,7 +35,6 @@ const styles = StyleSheet.create({
     width: 300,
   },
   text: {
-    borderColor: colors.mainColor,
     borderWidth:1,
     borderRadius:10,
     margin:5,

@@ -8,8 +8,10 @@ import { dateLocale } from '../../theme';
 import { OptionsAppContext } from '../../context/context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const CardNote = ({ note, onPress, onLongPress }) => {
-  const { isShowContentNotes } = useContext(OptionsAppContext);
+import { trimString } from '../../helpers';
+
+export default function CardNote ({ note, onPress, onLongPress }) {
+  const { isShowContentNotes, fontFamily, fontSize } = useContext(OptionsAppContext);
 
   const renderItem = ({ item }) => {
     // check-box-outline        полный
@@ -27,8 +29,9 @@ const CardNote = ({ note, onPress, onLongPress }) => {
           name={item.completed ? 'check-box-outline' : 'checkbox-blank-outline'}
           color={'#000'}
           size={24}
+
         />
-        <Text style={{paddingHorizontal:5}}>{item.content}</Text>
+        <Text style={{paddingHorizontal:5, fontFamily: fontFamily.id, fontSize: +fontSize.id }}>{item.content}</Text>
       </View>
     );
   };
@@ -49,13 +52,13 @@ const CardNote = ({ note, onPress, onLongPress }) => {
       }}
     >
       <View>
-        <Title>{note.title}</Title>
+        <Title style={{ fontFamily: fontFamily.id, fontSize: (+fontSize.id + 6) }}>{note.title}</Title>
         {isShowContentNotes &&
 
         <>
           {
             note.type === 'text' ?
-              <Text>{text}</Text>
+              <Text style={{ fontFamily: fontFamily.id, fontSize: +fontSize.id }}>{text}</Text>
               :
               <FlatList
                 data={note.text}
@@ -70,8 +73,8 @@ const CardNote = ({ note, onPress, onLongPress }) => {
           justifyContent: 'space-between',
           marginTop: 10,
         }}>
-          <Caption>{`Категория: ${note.category}`}</Caption>
-          <Caption>{`Дата: ${format(note.date, 'yyyy-MM-dd', { locale: dateLocale.ru })}`}</Caption>
+          <Caption>{`Категория: ${trimString(note.category)}`}</Caption>
+          <Caption>{`Дата: ${format(new Date(note.date), 'yyyy-MM-dd', { locale: dateLocale.ru })}`}</Caption>
         </View>
       </View>
     </TouchableRipple>
@@ -87,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CardNote;
+// export default CardNote;

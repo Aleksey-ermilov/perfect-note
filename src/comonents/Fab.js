@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { FAB, Portal, Provider } from 'react-native-paper';
 
 import { colors } from '../../theme';
+import { OptionsAppContext } from '../../context/context';
 
 export const _Fab = ({ navigation, createNote }) => {
+  const { appColor } = useContext(OptionsAppContext);
+
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,7 +26,7 @@ export const _Fab = ({ navigation, createNote }) => {
                 createNote('text')
               },
               color: colors.text,
-              style: styles.itemFab,
+              style: { ...styles.itemFab, backgroundColor: appColor },
             },
             {
               icon: 'check-box-multiple-outline',
@@ -33,11 +36,11 @@ export const _Fab = ({ navigation, createNote }) => {
                 // navigation.push('NotePage');
               },
               color: colors.text,
-              style: styles.itemFab,
+              style: { ...styles.itemFab, backgroundColor: appColor },
             },
           ]}
           color={colors.text}
-          fabStyle={styles.fab}
+          fabStyle={{ ...styles.fab, backgroundColor: appColor }}
           onStateChange={ ({ open }) => setOpen(open)}
         />
       </Portal>

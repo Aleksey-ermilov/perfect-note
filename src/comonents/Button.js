@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, StyleSheet, TouchableNativeFeedback, View } from 'react-native';
 
 import { colors } from '../../theme';
+import { OptionsAppContext } from '../../context/context';
 
 export const _Button = ({ title, onPress, styleContainer, styleText }) => {
+  const { appColor } = useContext(OptionsAppContext);
 
   return (
 
     <TouchableNativeFeedback onPress={onPress} >
-      <View style={[styles.container, styleContainer]}>
+      <View style={{...styles.container, ...styleContainer, backgroundColor: appColor}}>
         <Text style={[styles.text, styleText]}>{title}</Text>
       </View>
     </TouchableNativeFeedback>
@@ -18,7 +20,6 @@ export const _Button = ({ title, onPress, styleContainer, styleText }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems:'center',
-    backgroundColor: colors.mainColor,
     paddingVertical:10,
     paddingHorizontal:10,
     borderRadius:20,

@@ -20,3 +20,22 @@ export default function App() {
 
 
 
+
+
+
+
+
+/*
+import React from 'react';
+import { Text, View } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={{padding:30}}>
+      <Text>{'Что-то...'}</Text>
+    </View>
+  );
+}
+*/
+
+

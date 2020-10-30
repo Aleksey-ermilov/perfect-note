@@ -21,12 +21,13 @@ export default function MainStack({ navigation, route }) {
   const { isShowContentNotes, changeIsShowContentNotes, typeNote, changeTypeNote } = useContext(OptionsAppContext);
   const { addNote, updateNote, removeNote, addTrash } = useContext(NoteContext);
   const { showModal } = useContext(ModalContext);
-  // console.log('MainStackProps',route.params.notes);
+  const { appColor } = useContext(OptionsAppContext);
+
   return (
     <Stack.Navigator
       initialRouteName="MainPage"
       screenOptions={{
-        headerStyle: { backgroundColor: colors.mainColor },
+        headerStyle: { backgroundColor: appColor },
         headerTintColor: colors.text,
         headerTitleStyle: { fontWeight: 'bold' },
       }}
@@ -62,7 +63,7 @@ export default function MainStack({ navigation, route }) {
         component={NotePage}
         options={({ navigation, route }) => {
           return ({
-            title: 'Редактировать/Создать',
+            title: 'Создать',
             headerRight: (props) => (
               <HeaderButtons HeaderButtonComponent={HeaderIcon}>
                 <Item title='menu' iconName='ios-checkmark' onPress={() => {

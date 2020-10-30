@@ -1,8 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { SafeAreaView, View, Button, Text, StyleSheet, FlatList } from 'react-native';
+import { Menu, MenuOption, MenuOptions, MenuTrigger, renderers } from 'react-native-popup-menu';
 
 import { _Modal } from '../comonents/Modal';
 import { SortModal } from '../comonents/bodyModal/SortModal';
+
+import _SnackBar from '../comonents/_SnackBar';
 
 import CardNote from '../comonents/CardNote';
 import _Fab from '../comonents/Fab';
@@ -11,12 +14,13 @@ import { ModalContext, NoteContext, OptionsAppContext } from '../../context/cont
 
 import { compareNotes } from '../../helpers';
 import { sortArray } from '../../theme';
-import { Menu, MenuOption, MenuOptions, MenuTrigger, renderers } from 'react-native-popup-menu';
 
 const MainPage = ({ navigation, route }) => {
   const { notes, addTrash } = useContext(NoteContext);
   const { changeTypeNote } = useContext(OptionsAppContext);
   const { isVisibleModal, Component, hiddenModal } = useContext(ModalContext);
+
+  const [snackbar, setSnackbar] = useState({});
 
   const [ notesCategory, setNotesCategory ] = useState([])
   const [ sort, setSort] = useState(sortArray[0].id)
@@ -36,7 +40,11 @@ const MainPage = ({ navigation, route }) => {
 
   const selectorModal = () => {
     if (Component === 'SortModal') {
-      return <SortModal getSort={getSort} sort={sort}/>;
+      return (
+        <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
+          <SortModal getSort={getSort} sort={sort}/>
+        </_Modal>
+      );
     }
   };
   const getSort = (sort) => {
@@ -46,7 +54,7 @@ const MainPage = ({ navigation, route }) => {
   const createNote = (type) => {
     console.log('type new note', type)
     changeTypeNote(type)
-    navigation.push('NotePage', { type })
+    navigation.push('NotePage', { type, category })
   }
   const pressCard = (note) => {
     changeTypeNote(note.type)
@@ -60,24 +68,20 @@ const MainPage = ({ navigation, route }) => {
   const renderItem = ({ item }) => {
     let menu
     return (
-      // <CardNote
-      //   onPress={pressCard}
-      //   onLongPress={pressLongCard}
-      //   note={item}
-      //   key={item.id}
-      // />
       <Menu renderer={renderers.Popover}  ref={c => menu = c } >
         <MenuTrigger triggerOnLongPress={true}  >
           <CardNote
             onPress={pressCard}
             onLongPress={(note) => menu.open() }
             note={item}
-            key={item.id}
           />
         </MenuTrigger>
         <MenuOptions customStyles={optionsStyles}>
-          <MenuOption text="Установить пароль" onSelect={() => console.log(item.title)} />
-          <MenuOption text="Добавить в корзину" onSelect={() => addTrash(item)} />
+          <MenuOption text="Установить пароль" onSelect={() => console.log('Установить пароль')} />
+          <MenuOption text="Добавить в корзину" onSelect={() => {
+            setSnackbar({ text: 'Запись добавлена в корзину', isVisible: true });
+            addTrash(item)
+          }} />
         </MenuOptions>
       </Menu>
       )
@@ -85,9 +89,14 @@ const MainPage = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
-        {selectorModal()}
-      </_Modal>
+
+      {selectorModal()}
+
+      <_SnackBar
+        setSnackbar={setSnackbar}
+        snackbar={snackbar}
+      />
+
       {
         notesCategory.length !== 0 ?
           <FlatList
