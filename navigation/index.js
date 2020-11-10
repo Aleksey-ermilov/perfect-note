@@ -32,7 +32,7 @@ export default function Navigation(){
             }}
             drawerContent={props => <CustomDrawerContent {...props} />}
           >
-            <Drawer.Screen initialParams={{ category: 'all' } } name="MainStack" component={MainStack}  />
+            <Drawer.Screen initialParams={{ category: '1' } } name="MainStack" component={MainStack}  />
             <Drawer.Screen name="TrashStack" component={TrashStack} />
             <Drawer.Screen name="AboutStack" component={AboutStack} />
             <Drawer.Screen name="OptionsStack" component={OptionsStack} />

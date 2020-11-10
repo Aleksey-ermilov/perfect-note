@@ -19,13 +19,12 @@ const NotePage = ({ navigation, route }) => {
   const [note, setNote] = useState({
     title: '',
     text: [{ content: ``, completed: false, id: '1' }],
-    // id: '',
     itemBackground: '#fff',
-    category: 'all',
+    category: '1',
     date: new Date().toString(),
-    // type: route.params.type,
     type: typeNote,
     password:'',
+    isTrash: false
   });
 
   useEffect(() => {
@@ -70,7 +69,7 @@ const NotePage = ({ navigation, route }) => {
   };
 
   const handlerOnChangeTextTypeText = text => {
-    const str = text.split('\n').map(item => ({ content: item, completed: false }));
+    const str = text.split('\n').map( (item, index) => ({ content: item, completed: false, id: (index+1) }));
     setNote(prev => ({ ...prev, text: str }));
   };
   const handlerOnChangeTextTypeList = (text, id) => {
@@ -102,19 +101,28 @@ const NotePage = ({ navigation, route }) => {
     }) )
 }
 const handlerRemoveCheckBox = id => {
-  setNote(prev => ({
-    ...prev,
-    text: [
-      ...prev.text.filter(item => item.id !== id),
-    ],
-  }));
+    if (note.text.length === 1) {
+      setNote(prev => ({
+        ...prev,
+        text: [
+          ...prev.text.map(item => ({ ...item, content: '', completed: false})),
+        ],
+      }));
+    }else {
+      setNote(prev => ({
+        ...prev,
+        text: [
+          ...prev.text.filter(item => item.id !== id),
+        ],
+      }));
+    }
 };
 const handlerAddCheckBox = () => {
   if (!(note.text[note.text.length - 1].content.trim() === '')) {
     setNote(prev => ({
       ...prev,
       text: [
-        ...prev.text, { content: ``, completed: false, id: new Date().toString() },
+        ...prev.text, { content: ``, completed: false, id: new Date().getTime().toString() },
       ],
     }));
   }

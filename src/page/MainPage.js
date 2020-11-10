@@ -3,7 +3,6 @@ import { SafeAreaView, View, Button, Text, StyleSheet, FlatList } from 'react-na
 import { Menu, MenuOption, MenuOptions, MenuTrigger, renderers } from 'react-native-popup-menu';
 
 import { _Modal } from '../comonents/Modal';
-import { SortModal } from '../comonents/bodyModal/SortModal';
 
 import _SnackBar from '../comonents/_SnackBar';
 
@@ -14,41 +13,41 @@ import { ModalContext, NoteContext, OptionsAppContext } from '../../context/cont
 
 import { compareNotes } from '../../helpers';
 import { sortArray } from '../../theme';
+import { RadioListModal } from '../comonents/bodyModal/RadioListModal';
 
 const MainPage = ({ navigation, route }) => {
-  const { notes, addTrash } = useContext(NoteContext);
-  const { changeTypeNote } = useContext(OptionsAppContext);
+  const { notes, updateNote } = useContext(NoteContext);
+  const { changeTypeNote, sortNotes, setSortNote } = useContext(OptionsAppContext);
   const { isVisibleModal, Component, hiddenModal } = useContext(ModalContext);
 
   const [snackbar, setSnackbar] = useState({});
 
   const [ notesCategory, setNotesCategory ] = useState([])
-  const [ sort, setSort] = useState(sortArray[0].id)
 
   const { category } = route.params
 
   useEffect(() => {
-    const sortedNotes = compareNotes(notes, sort)
+    const sortedNotes = compareNotes(notes, sortNotes.id)
 
-    if (category === 'all'){
+    if (category === '1'){
       setNotesCategory(sortedNotes)
     }else {
       setNotesCategory( sortedNotes.filter(note => note.category === category) )
     }
 
-  },[category,notes,sort])
+  },[category,notes,sortNotes])
 
   const selectorModal = () => {
     if (Component === 'SortModal') {
       return (
         <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
-          <SortModal getSort={getSort} sort={sort}/>
+          <RadioListModal dataList={sortArray} getValue={getSort} selected={sortNotes} />
         </_Modal>
       );
     }
   };
   const getSort = (sort) => {
-    setSort(sort);
+    setSortNote(sort);
   };
 
   const createNote = (type) => {
@@ -60,9 +59,12 @@ const MainPage = ({ navigation, route }) => {
     changeTypeNote(note.type)
     navigation.push('NotePage', { note })
   };
+
+
+
  /* const pressLongCard = (note) => {
     // removeNote(note)
-    addTrash(note)
+    updateNote({ ...item, isTrash: true})
   };*/
 
   const renderItem = ({ item }) => {
@@ -80,7 +82,8 @@ const MainPage = ({ navigation, route }) => {
           <MenuOption text="Установить пароль" onSelect={() => console.log('Установить пароль')} />
           <MenuOption text="Добавить в корзину" onSelect={() => {
             setSnackbar({ text: 'Запись добавлена в корзину', isVisible: true });
-            addTrash(item)
+            // removeNote(item) // add trash
+            updateNote({ ...item, isTrash: true})
           }} />
         </MenuOptions>
       </Menu>
@@ -98,11 +101,11 @@ const MainPage = ({ navigation, route }) => {
       />
 
       {
-        notesCategory.length !== 0 ?
+        notesCategory.filter( note => !note.isTrash ).length !== 0 ?
           <FlatList
-            data={notesCategory}
+            data={notesCategory.filter( note => !note.isTrash )}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id.toString()}
           />
            :
           <View style={styles.noNotes}>

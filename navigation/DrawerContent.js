@@ -17,7 +17,7 @@ import { NewCategoryModal } from '../src/comonents/bodyModal/NewCategoryModal';
 export const CustomDrawerContent = (props) => {
   const { categories, newCategory, removeCategory } = useContext(NoteContext);
 
-  const [focus, setFocus] = useState('MainPageall');
+  const [focus, setFocus] = useState('MainPage1');
   const [isModal, setIsModal] = useState(false);
 
   const getText = category => {
@@ -39,11 +39,11 @@ export const CustomDrawerContent = (props) => {
           if (focus === `MainPage${item.id}`){
             props.navigation.navigate('MainStack', {
               screen: 'MainPage', params: {
-                category: 'all',
+                category: '1',
               },
             });
           }
-          removeCategory(item)
+          removeCategory(item.id)
           }
         }
       ],
@@ -132,7 +132,7 @@ export const CustomDrawerContent = (props) => {
                 />
               </View>
               {
-                item.id !== 'all' &&
+                item.id !== '1' &&
                 <TouchableOpacity onPress={() => handlerRemoveCategory(item)}>
                   <View>
                     <Icon

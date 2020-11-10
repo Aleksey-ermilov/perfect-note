@@ -64,7 +64,7 @@ export const CheckBox = ({ note, onChangeText, onChecked, removeCheckBox, addChe
       <FlatList
         data={notCompleted}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
       />
 
       { yesCompleted.length >= 1 && <Divider style={{ marginHorizontal: 10, backgroundColor: appColor }}/>}
@@ -72,7 +72,7 @@ export const CheckBox = ({ note, onChangeText, onChecked, removeCheckBox, addChe
       <FlatList
         data={yesCompleted}
         renderItem={renderItem}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
       />
 
       <TouchableOpacity onPress={() => {

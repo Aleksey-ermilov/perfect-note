@@ -4,6 +4,7 @@ import {
   SET_APP_COLOR,
   SET_FONT_FAMILY,
   SET_FONT_SIZE,
+  SET_SORT_NOTES,
 } from '../types';
 
 const handlers = {
@@ -29,16 +30,23 @@ const handlers = {
     // return state
   },
   [SET_FONT_FAMILY]: (state, action) => {
-    // console.log('reducer SET_APP_COLOR');
+    // console.log('reducer SET_FONT_FAMILY');
     return {
       ...state, fontFamily: action.fontFamily
     };
     // return state
   },
   [SET_FONT_SIZE]: (state, action) => {
-    // console.log('reducer SET_APP_COLOR');
+    // console.log('reducer SET_FONT_SIZE');
     return {
       ...state, fontSize: action.fontSize
+    };
+    // return state
+  },
+  [SET_SORT_NOTES]: (state, action) => {
+    // console.log('reducer SET_SORT_NOTES');
+    return {
+      ...state, sortNotes: action.sort
     };
     // return state
   },

@@ -8,9 +8,9 @@ export const dateLocale = {
 };
 
 export const sortArray = [
-  {content: 'АБВ', id: 'ABC'},
-  {content: 'ЯЮЭ', id: 'ZYX'},
-  {content: 'По дате', id: 'date'},
+  {text: 'АБВ', id: 'ABC'},
+  {text: 'ЯЮЭ', id: 'ZYX'},
+  {text: 'По дате', id: 'date'},
 ]
 
 export const colors = {

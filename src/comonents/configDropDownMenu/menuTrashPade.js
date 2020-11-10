@@ -1,11 +1,11 @@
 import { TextMenu, CheckboxMenu } from './ComponentsHelpers';
 
-export const menuTrashPade = (isShowContentNotes, changeIsShowContentNotes, removeAllTrash) => {
+export const menuTrashPade = (isShowContentNotes, changeIsShowContentNotes, removeAllTrash, appColor) => {
 
   return [
 
     {
-      children: CheckboxMenu('Показать содержимое', isShowContentNotes, changeIsShowContentNotes),
+      children: CheckboxMenu('Показать содержимое', isShowContentNotes, changeIsShowContentNotes, appColor),
       onPress: () => {
         // console.log('Показать содержимое');
         changeIsShowContentNotes();

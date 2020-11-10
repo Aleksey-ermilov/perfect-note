@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, Button, Text, StyleSheet, SafeAreaView } from 'react-native';
 import {  } from 'react-native-paper';
 
-import { colors, appColors, fontFamilyNote, fontSizeNote } from '../../../theme';
+import { appColors, fontFamilyNote, fontSizeNote } from '../../../theme';
 
 import { CardText } from '../../comonents/CardText';
 

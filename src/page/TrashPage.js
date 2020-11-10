@@ -7,18 +7,18 @@ import CardNote from '../comonents/CardNote';
 import _SnackBar from '../comonents/_SnackBar';
 
 const TrashPage = ({navigation}) => {
-  const { trash, reestablishTrash, removeTrash } = useContext(NoteContext);
+  const { notes, updateNote, removeNote } = useContext(NoteContext);
 
   const [snackbar, setSnackbar] = useState({});
 
   const pressCard = (note) => {
     // console.log('pressCard', note)
     setSnackbar({ text: 'Запись восстановлена!!!', isVisible: true });
-    reestablishTrash(note)
+    updateNote({ ...note, isTrash: false })
   };
   const pressLongCard = (note) => {
     // console.log('pressLongCard', note)
-    removeTrash(note)
+    removeNote(note)
   };
 
   const renderItem = ({ item }) => {
@@ -27,7 +27,6 @@ const TrashPage = ({navigation}) => {
             onPress={pressCard}
             onLongPress={pressLongCard}
             note={item}
-            key={item.id}
           />
     )
   }
@@ -39,11 +38,11 @@ const TrashPage = ({navigation}) => {
         snackbar={snackbar}
       />
       {
-        trash.length !== 0 ?
+        notes.filter( note => note.isTrash ).length !== 0 ?
           <FlatList
-            data={trash}
+            data={notes.filter( note => note.isTrash )}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id.toString()}
           />
           :
           <View style={styles.noNotes}>

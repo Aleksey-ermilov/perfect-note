@@ -4,6 +4,7 @@ export const CHANGE_TYPE_NOTE = 'CHANGE_TYPE_NOTE'
 export const SET_APP_COLOR = 'SET_APP_COLOR'
 export const SET_FONT_FAMILY = 'SET_FONT_FAMILY'
 export const SET_FONT_SIZE = 'SET_FONT_SIZE'
+export const SET_SORT_NOTES = 'SET_SORT_NOTES'
 
 //NoteState
 export const NEW_CATEGORY = 'NEW_CATEGORY'
@@ -11,11 +12,9 @@ export const REMOVE_CATEGORY = 'REMOVE_CATEGORY'
 export const ADD_NOTE = 'ADD_NOTE'
 export const UPDATE_NOTE = 'UPDATE_NOTE'
 export const REMOVE_NOTE = 'REMOVE_NOTE'
-export const SELECTED_NOTE = 'SELECTED_NOTE'
-export const ADD_TRASH = 'ADD_TRASH'
-export const REMOVE_TRASH = 'REMOVE_TRASH'
 export const REMOVE_ALL_TRASH = 'REMOVE_ALL_TRASH'
-export const REESTABLISH_TRASH = 'REESTABLISH_TRASH'
+export const LOAD_CATEGORIES = 'LOAD_CATEGORIES'
+export const LOAD_NOTES = 'LOAD_NOTES'
 
 //ModalState
 export const SHOW_MODAL = 'SHOW_MODAL'

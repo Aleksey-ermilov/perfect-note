@@ -8,10 +8,9 @@ export const trimString = (text, maxStringLength = 15) => {
 }
 
 export const compareNotes = ( notes, type = 'ABC' ) => {
-
   switch (type) {
     case 'ABC':
-      console.log('helper sort ABC');
+      // console.log('helper sort ABC');
       return notes.sort(function compare( a, b ) {
         if ( a.title < b.title ){
           return -1;
@@ -23,7 +22,7 @@ export const compareNotes = ( notes, type = 'ABC' ) => {
       })
       break;
     case 'ZYX':
-      console.log('helper sort ZYX');
+      // console.log('helper sort ZYX');
       return notes.sort(function compare( a, b ) {
         if ( a.title > b.title ){
           return -1;
@@ -35,7 +34,7 @@ export const compareNotes = ( notes, type = 'ABC' ) => {
       })
       break;
     case 'date':
-      console.log('helper sort date');
+      // console.log('helper sort date');
       return notes.sort(function(a,b){
         return new Date(b.date) - new Date(a.date);
       });
@@ -43,5 +42,4 @@ export const compareNotes = ( notes, type = 'ABC' ) => {
     default:
       return notes;
   }
-
 }

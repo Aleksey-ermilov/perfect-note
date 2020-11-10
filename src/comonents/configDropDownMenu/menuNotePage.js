@@ -1,6 +1,6 @@
 import { TextMenu } from './ComponentsHelpers';
 
-export const menuNotePage = (showModal, removeNote, route, navigation, typeNote, changeTypeNote) => {
+export const menuNotePage = (showModal, updateNote, route, navigation, typeNote, changeTypeNote) => {
 
   return [
     { children: TextMenu('Список'),onPress: () => {
@@ -27,7 +27,7 @@ export const menuNotePage = (showModal, removeNote, route, navigation, typeNote,
         const note = route.params.note;
         if (note.id) {
           navigation.goBack();
-          removeNote(note);
+          updateNote({ ...note, isTrash: true })
         } else {
           navigation.goBack();
         }

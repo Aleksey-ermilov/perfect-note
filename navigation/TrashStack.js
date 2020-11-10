@@ -46,7 +46,7 @@ export default function AboutStack() {
                 <DropDownMenuHeader
                   ComponentTrigger={Item}
                   componentTriggerProps={{ title: 'menu', iconName: 'md-more' }}
-                  menuOptions={menuTrashPade(isShowContentNotes, changeIsShowContentNotes, removeAllTrash)}
+                  menuOptions={menuTrashPade(isShowContentNotes, changeIsShowContentNotes, removeAllTrash, appColor)}
                 />
               </HeaderButtons>
             ),

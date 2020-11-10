@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 
 export default function MainStack({ navigation, route }) {
   const { isShowContentNotes, changeIsShowContentNotes, typeNote, changeTypeNote } = useContext(OptionsAppContext);
-  const { addNote, updateNote, removeNote, addTrash } = useContext(NoteContext);
+  const { addNote, updateNote } = useContext(NoteContext);
   const { showModal } = useContext(ModalContext);
   const { appColor } = useContext(OptionsAppContext);
 
@@ -50,7 +50,7 @@ export default function MainStack({ navigation, route }) {
                 <DropDownMenuHeader
                   ComponentTrigger={Item}
                   componentTriggerProps={{ title: 'menu', iconName: 'md-more' }}
-                  menuOptions={menuMainPade(showModal, isShowContentNotes, changeIsShowContentNotes)}
+                  menuOptions={menuMainPade(showModal, isShowContentNotes, changeIsShowContentNotes, appColor)}
                 />
               </HeaderButtons>
             ),
@@ -80,7 +80,7 @@ export default function MainStack({ navigation, route }) {
                 <DropDownMenuHeader
                   ComponentTrigger={Item}
                   componentTriggerProps={{ title: 'menu', iconName: 'md-more' }}
-                  menuOptions={menuNotePage(showModal, addTrash, route, navigation, typeNote, changeTypeNote)}
+                  menuOptions={menuNotePage(showModal, updateNote, route, navigation, typeNote, changeTypeNote)}
                 />
               </HeaderButtons>
             ),

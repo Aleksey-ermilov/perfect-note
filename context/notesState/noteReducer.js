@@ -2,56 +2,53 @@ import {
   ADD_NOTE,
   REMOVE_NOTE,
   UPDATE_NOTE,
-  SELECTED_NOTE,
   NEW_CATEGORY,
   REMOVE_CATEGORY,
-  ADD_TRASH,
-  REMOVE_TRASH,
   REMOVE_ALL_TRASH,
-  REESTABLISH_TRASH,
+  LOAD_CATEGORIES,
+  LOAD_NOTES
 } from '../types';
 
 const handlers = {
   [NEW_CATEGORY]: (state, action) => {
-    // console.log('reducer NEW_CATEGORY', action.note);
+    // console.log('reducer NEW_CATEGORY', action.category);
     return {
       ...state,
       categories: [
-        ...state.categories, {
-          category: action.category,
-          id: Date.now().toString(),
-        }],
+        ...state.categories, action.category
+      ],
     };
     // return state
   },
   [REMOVE_CATEGORY]: (state, action) => {
-    // console.log('reducer REMOVE_CATEGORY', action);
+    // console.log('reducer REMOVE_CATEGORY 888   ', action.id);
     return {
       ...state,
-      categories: state.categories.filter(item => item.id !== action.category.id),
-      trash: [
-        ...state.notes.filter(note => note.category === action.category.id).map( note => ({...note, category: 'all'}) ),
-        ...state.trash,
+      notes: [
+        ...state.notes.map( note => {
+          if (note.category === action.id){
+            return({...note, category: '1', isTrash: true})
+          }else {
+            return note
+          }
+        })
       ],
-      notes: state.notes.filter(note => note.category !== action.category.id),
+      categories: state.categories.filter(item => item.id !== action.id),
     };
     // return state
   },
   [ADD_NOTE]: (state, action) => {
     // console.log('reducer add_note', action.note);
     return {
-      ...state, notes: [{
-        ...action.note,
-        id: Date.now().toString(),
-      },
-        ...state.notes,
+      ...state, notes: [
+        action.note,...state.notes,
       ],
     };
     // return state
   },
   [REMOVE_NOTE]: (state, action) => {
-    // console.log('reducer REMOVE_NOTE', action.note);
-    return { ...state, notes: state.notes.filter(note => note.id !== action.note.id) };
+    // console.log('reducer REMOVE_NOTE', action.id);
+    return { ...state, notes: state.notes.filter(note => note.id !== action.id) };
     // return state
   },
   [UPDATE_NOTE]: (state, action) => {
@@ -66,44 +63,27 @@ const handlers = {
     };
     // return state
   },
-  // [SELECTED_NOTE]: (state, action) => {
-  //   // console.log('reducer SELECTED_NOTE', action.selectNote);
-  //   return {
-  //     ...state, selectNote: action.selectNote
-  //   };
-  //   // return state
-  // },
-  [ADD_TRASH]: (state, action) => {
-    // console.log('reducer ADD_TRASH', action.note);
-    return {
-      ...state,
-      notes: state.notes.filter(note => note.id !== action.note.id),
-      trash: [action.note, ...state.trash],
-    };
-    // return state
-  },
-  [REMOVE_TRASH]: (state, action) => {
-    // console.log('reducer REMOVE_TRASH', action.note);
-    return {
-      ...state,
-      trash: state.trash.filter(note => note.id !== action.note.id),
-    };
-    // return state
-  },
   [REMOVE_ALL_TRASH]: (state, action) => {
-    // console.log('reducer REMOVE_TRASH', action.note);
+    // console.log('reducer REMOVE_ALL_TRASH', action);
     return {
       ...state,
-      trash: [],
+      notes: state.notes.filter( note => !note.isTrash ),
     };
     // return state
   },
-  [REESTABLISH_TRASH]: (state, action) => {
-    // console.log('reducer REESTABLISH_TRASH', action.note);
+  [LOAD_CATEGORIES]: (state, action) => {
+    // console.log('reducer LOAD_CATEGORIES', action.categories);
     return {
       ...state,
-      notes: [action.note, ...state.notes],
-      trash: state.trash.filter(note => note.id !== action.note.id),
+      categories: action.categories
+    };
+    // return state
+  },
+  [LOAD_NOTES]: (state, action) => {
+    // console.log('reducer LOAD_NOTES', action.notes);
+    return {
+      ...state,
+      notes: action.notes
     };
     // return state
   },
