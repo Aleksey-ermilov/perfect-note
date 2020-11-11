@@ -6,9 +6,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { format } from 'date-fns';
 
-import { NoteContext } from '../context/context';
+import { ModalContext, NoteContext } from '../context/context';
 
-import { colors, sizeIconDrawer, dateLocale } from '../theme';
+import { colors, sizeIconDrawer, dateLocale, sortArray } from '../theme';
 import { trimString } from '../helpers';
 
 import { _Modal } from '../src/comonents/Modal';
@@ -16,9 +16,19 @@ import { NewCategoryModal } from '../src/comonents/bodyModal/NewCategoryModal';
 
 export const CustomDrawerContent = (props) => {
   const { categories, newCategory, removeCategory } = useContext(NoteContext);
+  const { isVisibleModal, showModal, Component, hiddenModal } = useContext(ModalContext);
 
   const [focus, setFocus] = useState('MainPage1');
-  const [isModal, setIsModal] = useState(false);
+
+  const selectorModal = () => {
+    if (Component === 'NewCategoryModal') {
+      return (
+        <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
+          <NewCategoryModal getText={getText}  />
+        </_Modal>
+      );
+    }
+  };
 
   const getText = category => {
     // console.log('added category', category);
@@ -54,12 +64,8 @@ export const CustomDrawerContent = (props) => {
 
   return (
     <DrawerContentScrollView {...props}>
-      <_Modal visible={isModal} changeVisible={() => setIsModal(false)}>
-        <NewCategoryModal
-          getText={getText}
-          hiddenModal={() => setIsModal(false)}
-        />
-      </_Modal>
+
+      {selectorModal()}
 
       <ImageBackground
         source={require('../assets/drawerImage/image1.png')}
@@ -149,7 +155,8 @@ export const CustomDrawerContent = (props) => {
         <DrawerItem
           label="Новая категория"
           onPress={() => {
-            setIsModal(true);
+            showModal('NewCategoryModal')
+            // setIsModal(true);
           }}
           icon={({ color, size }) => (
             <Icon

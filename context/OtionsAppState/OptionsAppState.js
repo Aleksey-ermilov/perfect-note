@@ -13,10 +13,12 @@ import {
   SET_FONT_FAMILY,
   SET_FONT_SIZE,
   SET_SORT_NOTES,
+  SET_LOADING,
 } from '../types'
 
 export const OptionsAppState = ({ children }) => {
   const initialState = {
+    loading: true,
     isShowContentNotes: false,
     typeNote: 'text',
     appColor: appColors[4].color,
@@ -41,7 +43,10 @@ export const OptionsAppState = ({ children }) => {
 
   const setSortNote = sort => setSortNotesStory(sort).then( () => dispatch({ type: SET_SORT_NOTES, sort }) )
 
+  const setLoading = loading => dispatch({ type: SET_LOADING, loading })
+
   return <OptionsAppContext.Provider value={{
+    loading: state.loading,
     isShowContentNotes: state.isShowContentNotes,
     typeNote: state.typeNote,
     appColor: state.appColor,
@@ -55,6 +60,7 @@ export const OptionsAppState = ({ children }) => {
     setFontFamily,
     setFontSize,
     setSortNote,
+    setLoading,
   }}
   >{children}</OptionsAppContext.Provider>
 }

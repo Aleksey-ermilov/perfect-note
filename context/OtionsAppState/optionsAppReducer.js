@@ -5,6 +5,7 @@ import {
   SET_FONT_FAMILY,
   SET_FONT_SIZE,
   SET_SORT_NOTES,
+  SET_LOADING,
 } from '../types';
 
 const handlers = {
@@ -47,6 +48,13 @@ const handlers = {
     // console.log('reducer SET_SORT_NOTES');
     return {
       ...state, sortNotes: action.sort
+    };
+    // return state
+  },
+  [SET_LOADING]: (state, action) => {
+    // console.log('reducer SET_LOADING');
+    return {
+      ...state, loading: action.loading
     };
     // return state
   },

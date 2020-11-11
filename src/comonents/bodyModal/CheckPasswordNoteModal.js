@@ -1,32 +1,33 @@
-import React, { useContext, useState } from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
+import React, { useContext, useState, useRef, useEffect } from 'react';
+import { View, StyleSheet, TextInput, Text } from 'react-native';
+import { HelperText } from 'react-native-paper';
 
 import { _Button } from '../Button';
 
-import { colors } from '../../../theme';
 import { ModalContext, OptionsAppContext } from '../../../context/context';
 
-export const NewCategoryModal = ({ getText }) => {
+export const CheckPasswordNoteModal = ({ getCheckPass }) => {
   const { appColor } = useContext(OptionsAppContext);
   const { hiddenModal } = useContext(ModalContext);
 
-  const [ value, setValue ] = useState('')
+  const [ pass, setPass ] = useState('')
 
   const handlerButton = () => {
-    getText(value)
+    getCheckPass(pass)
     hiddenModal()
   }
 
   return (
     <View style={styles.container}>
       <TextInput
-        value={value}
-        onChangeText={ text => setValue(text)}
+        value={pass}
+        onChangeText={ text => setPass(text)}
         style={{ ...styles.text, borderColor: appColor }}
         autoFocus={true}
-        placeholder={'Категория...'}
+        placeholder={'Пароль...'}
+        secureTextEntry={true}
       />
-      <_Button onPress={ handlerButton } title={'Добавить категорию'}/>
+      <_Button onPress={ handlerButton } title={'Войти'}/>
     </View>
   )
 }

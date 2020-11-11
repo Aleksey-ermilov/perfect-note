@@ -62,7 +62,7 @@ export default function CardNote ({ note, onPress, onLongPress }) {
     >
       <View>
         <Title style={{ fontFamily: fontFamily.id, fontSize: (+fontSize.id + 6) }}>{note.title}</Title>
-        {isShowContentNotes &&
+        {isShowContentNotes && note.password === '' &&
 
         <>
           {

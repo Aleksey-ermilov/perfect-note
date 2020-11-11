@@ -5,6 +5,7 @@ export const SET_APP_COLOR = 'SET_APP_COLOR'
 export const SET_FONT_FAMILY = 'SET_FONT_FAMILY'
 export const SET_FONT_SIZE = 'SET_FONT_SIZE'
 export const SET_SORT_NOTES = 'SET_SORT_NOTES'
+export const SET_LOADING = 'SET_LOADING'
 
 //NoteState
 export const NEW_CATEGORY = 'NEW_CATEGORY'

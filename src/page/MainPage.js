@@ -1,8 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { SafeAreaView, View, Button, Text, StyleSheet, FlatList } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 import { Menu, MenuOption, MenuOptions, MenuTrigger, renderers } from 'react-native-popup-menu';
 
 import { _Modal } from '../comonents/Modal';
+import { RadioListModal } from '../comonents/bodyModal/RadioListModal';
+import { PasswordNoteModal } from '../comonents/bodyModal/PasswordNoteModal';
+import { CheckPasswordNoteModal } from '../comonents/bodyModal/CheckPasswordNoteModal';
 
 import _SnackBar from '../comonents/_SnackBar';
 
@@ -13,15 +17,14 @@ import { ModalContext, NoteContext, OptionsAppContext } from '../../context/cont
 
 import { compareNotes } from '../../helpers';
 import { sortArray } from '../../theme';
-import { RadioListModal } from '../comonents/bodyModal/RadioListModal';
 
 const MainPage = ({ navigation, route }) => {
   const { notes, updateNote } = useContext(NoteContext);
-  const { changeTypeNote, sortNotes, setSortNote } = useContext(OptionsAppContext);
-  const { isVisibleModal, Component, hiddenModal } = useContext(ModalContext);
+  const { loading, appColor, changeTypeNote, sortNotes, setSortNote } = useContext(OptionsAppContext);
+  const { isVisibleModal, showModal, Component, hiddenModal } = useContext(ModalContext);
 
   const [snackbar, setSnackbar] = useState({});
-
+  const [ selectedNote, setSelectedNote] = useState()
   const [ notesCategory, setNotesCategory ] = useState([])
 
   const { category } = route.params
@@ -45,9 +48,34 @@ const MainPage = ({ navigation, route }) => {
         </_Modal>
       );
     }
+    if (Component === 'PasswordModal') {
+      return (
+        <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
+          <PasswordNoteModal getPass={getPass} note={selectedNote} />
+        </_Modal>
+      );
+    }
+    if (Component === 'CheckPasswordNoteModal') {
+      return (
+        <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
+          <CheckPasswordNoteModal getCheckPass={getCheckPass}/>
+        </_Modal>
+      );
+    }
   };
   const getSort = (sort) => {
     setSortNote(sort);
+  };
+  const getPass = (pass) => {
+    // console.log('pass',pass);
+    // console.log('selected note', selectedNote.title)
+    updateNote({...selectedNote, password: pass})
+  };
+  const getCheckPass = (pass) => {
+    if (selectedNote.password === pass){
+      changeTypeNote(selectedNote.type)
+      navigation.push('NotePage', { note: selectedNote })
+    }
   };
 
   const createNote = (type) => {
@@ -56,16 +84,14 @@ const MainPage = ({ navigation, route }) => {
     navigation.push('NotePage', { type, category })
   }
   const pressCard = (note) => {
-    changeTypeNote(note.type)
-    navigation.push('NotePage', { note })
+    setSelectedNote(note)
+    if (note.password.trim() === ''){
+      changeTypeNote(note.type)
+      navigation.push('NotePage', { note })
+    }else {
+      showModal('CheckPasswordNoteModal');
+    }
   };
-
-
-
- /* const pressLongCard = (note) => {
-    // removeNote(note)
-    updateNote({ ...item, isTrash: true})
-  };*/
 
   const renderItem = ({ item }) => {
     let menu
@@ -79,16 +105,21 @@ const MainPage = ({ navigation, route }) => {
           />
         </MenuTrigger>
         <MenuOptions customStyles={optionsStyles}>
-          <MenuOption text="Установить пароль" onSelect={() => console.log('Установить пароль')} />
+          <MenuOption text="Установить пароль" onSelect={() => {
+            showModal('PasswordModal');
+            setSelectedNote(item)
+          }} />
           <MenuOption text="Добавить в корзину" onSelect={() => {
+            updateNote({ ...item, isTrash: true})
             setSnackbar({ text: 'Запись добавлена в корзину', isVisible: true });
             // removeNote(item) // add trash
-            updateNote({ ...item, isTrash: true})
           }} />
         </MenuOptions>
       </Menu>
       )
   }
+
+  if (loading) return <View style={styles.noNotes}><ActivityIndicator animating={true} size={'large'} color={appColor} /></View>
 
   return (
     <SafeAreaView style={styles.container}>

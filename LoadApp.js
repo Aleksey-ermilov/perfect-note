@@ -7,11 +7,12 @@ import { DB } from './db'
 
 export const LoadApp = ({ children }) => {
   const { loadCategories, loadNotes } = useContext(NoteContext);
-  const { setColor, setFontFamily, setFontSize, setSortNote } = useContext(OptionsAppContext);
+  const { setLoading, setColor, setFontFamily, setFontSize, setSortNote } = useContext(OptionsAppContext);
 
   useEffect( () => {
 
     ( async function f () {
+      setLoading(true)
       await getAppColorStory().then( color => {
         if(color){
           color = JSON.parse(color)
@@ -43,6 +44,7 @@ export const LoadApp = ({ children }) => {
       await DB.init().then(() => console.log('DB init') )
       await DB.getCategories().then( categories => loadCategories(categories) )
       await DB.getNotes().then( notes => loadNotes(notes) )
+      setLoading(false)
     })()
   }, [])
 
