@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { SafeAreaView, View, Button, Text, StyleSheet, FlatList } from 'react-native';
-import { ActivityIndicator } from 'react-native-paper';
 import { Menu, MenuOption, MenuOptions, MenuTrigger, renderers } from 'react-native-popup-menu';
 
 import { _Modal } from '../comonents/Modal';
@@ -20,7 +19,7 @@ import { sortArray } from '../../theme';
 
 const MainPage = ({ navigation, route }) => {
   const { notes, updateNote } = useContext(NoteContext);
-  const { loading, appColor, changeTypeNote, sortNotes, setSortNote } = useContext(OptionsAppContext);
+  const { changeTypeNote, sortNotes, setSortNote } = useContext(OptionsAppContext);
   const { isVisibleModal, showModal, Component, hiddenModal } = useContext(ModalContext);
 
   const [snackbar, setSnackbar] = useState({});
@@ -67,8 +66,6 @@ const MainPage = ({ navigation, route }) => {
     setSortNote(sort);
   };
   const getPass = (pass) => {
-    // console.log('pass',pass);
-    // console.log('selected note', selectedNote.title)
     updateNote({...selectedNote, password: pass})
   };
   const getCheckPass = (pass) => {
@@ -118,8 +115,6 @@ const MainPage = ({ navigation, route }) => {
       </Menu>
       )
   }
-
-  if (loading) return <View style={styles.noNotes}><ActivityIndicator animating={true} size={'large'} color={appColor} /></View>
 
   return (
     <SafeAreaView style={styles.container}>

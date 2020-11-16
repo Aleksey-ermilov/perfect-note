@@ -8,35 +8,40 @@ import MainStack from './MainStack';
 import AboutStack from './AboutStack';
 import TrashStack from './TrashStack';
 import OptionsStack from './OptionsStack';
+import LockedStack from './LockedStack';
 
 import { colors } from '../theme';
 import { OptionsAppContext } from '../context/context';
 
 const Drawer = createDrawerNavigator();
 
-export default function Navigation(){
-  const { appColor } = useContext(OptionsAppContext);
+export default function Navigation() {
+  const { appColor, isAuth } = useContext(OptionsAppContext);
 
-    return (
-        <NavigationContainer >
-          <Drawer.Navigator
-            initialRouteName="MainStack"
-            drawerStyle={{
-              backgroundColor: appColor,
-              color: colors.text
-            }}
-            drawerContentOptions={{
-              activeTintColor: colors.text,
-              activeBackgroundColor: colors.backgroundDrawerInactiveItem,
-              inactiveTintColor: colors.text,
-            }}
-            drawerContent={props => <CustomDrawerContent {...props} />}
-          >
-            <Drawer.Screen initialParams={{ category: '1' } } name="MainStack" component={MainStack}  />
-            <Drawer.Screen name="TrashStack" component={TrashStack} />
-            <Drawer.Screen name="AboutStack" component={AboutStack} />
-            <Drawer.Screen name="OptionsStack" component={OptionsStack} />
-          </Drawer.Navigator>
-        </NavigationContainer>
-      );
+  return (
+    <NavigationContainer>
+      { isAuth ?
+        <Drawer.Navigator
+          initialRouteName="MainStack"
+          drawerStyle={{
+            backgroundColor: appColor,
+            color: colors.text,
+          }}
+          drawerContentOptions={{
+            activeTintColor: colors.text,
+            activeBackgroundColor: colors.backgroundDrawerInactiveItem,
+            inactiveTintColor: colors.text,
+          }}
+          drawerContent={props => <CustomDrawerContent {...props} />}
+        >
+          <Drawer.Screen initialParams={{ category: '1' }} name="MainStack" component={MainStack}/>
+          <Drawer.Screen name="TrashStack" component={TrashStack}/>
+          <Drawer.Screen name="AboutStack" component={AboutStack}/>
+          <Drawer.Screen name="OptionsStack" component={OptionsStack}/>
+        </Drawer.Navigator>
+        :
+        <LockedStack />
+      }
+    </NavigationContainer>
+  );
 }

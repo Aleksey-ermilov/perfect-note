@@ -1,13 +1,25 @@
 import React, { useEffect, useContext } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
 
 import { NoteContext, OptionsAppContext } from './context/context';
 
-import { getAppColorStory, getFontSizeStory, getFontFamilyStory, getSortNotesStory } from './storage';
+import { getAppColorStory, getFontSizeStory, getFontFamilyStory, getSortNotesStory, getAppPasswordStory } from './storage';
 import { DB } from './db'
 
 export const LoadApp = ({ children }) => {
   const { loadCategories, loadNotes } = useContext(NoteContext);
-  const { setLoading, setColor, setFontFamily, setFontSize, setSortNote } = useContext(OptionsAppContext);
+  const {
+    loading,
+    appColor,
+    setLoading,
+    setColor,
+    setFontFamily,
+    setFontSize,
+    setSortNote,
+    setAppPassword,
+    setIsAuth,
+  } = useContext(OptionsAppContext);
 
   useEffect( () => {
 
@@ -37,6 +49,16 @@ export const LoadApp = ({ children }) => {
           setSortNote(sort)
         }
       })
+      await getAppPasswordStory().then( appPass => {
+        if(appPass){
+          appPass = JSON.parse(appPass)
+          setAppPassword(appPass)
+          setIsAuth(appPass.type === 'disabled' ? true : false)
+        }else {
+          setAppPassword( {type: 'disabled', password: ''} )
+          setIsAuth(true)
+        }
+      })
 
       // await DB.dropCategoriesTable().then( () => console.log('drop table categories'))
       // await DB.dropNotesTable().then(() => console.log('drop table notes'))
@@ -48,9 +70,20 @@ export const LoadApp = ({ children }) => {
     })()
   }, [])
 
+  if (loading) return <View style={styles.noNotes}><ActivityIndicator animating={true} size={'large'} color={appColor} /></View>
+
   return (
     <>
       {children}
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  noNotes:{
+    flex: 1,
+
+    alignItems: "center",
+    justifyContent: "center",
+  }
+});

@@ -6,6 +6,8 @@ import {
   SET_FONT_SIZE,
   SET_SORT_NOTES,
   SET_LOADING,
+  SET_APP_PASSWORD,
+  IS_AUTH,
 } from '../types';
 
 const handlers = {
@@ -58,6 +60,14 @@ const handlers = {
     };
     // return state
   },
+  [SET_APP_PASSWORD]: (state, action) => {
+    // console.log('reducer SET_APP_PASSWORD');
+    return {
+      ...state, appPassword: action.appPass
+    };
+    // return state
+  },
+  [IS_AUTH]: (state, action) => ({ ...state, isAuth: action.auth }),
   DEFAULT: state => state,
 }
 

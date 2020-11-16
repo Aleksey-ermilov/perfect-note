@@ -4,7 +4,7 @@ import { OptionsAppContext } from '../context';
 import { optionsAppReducer } from './optionsAppReducer';
 
 import { appColors, fontFamilyNote, fontSizeNote, sortArray } from '../../theme';
-import { setFontSizeStory, setFontFamilyStory, setAppColorStory, setSortNotesStory } from '../../storage';
+import { setFontSizeStory, setFontFamilyStory, setAppColorStory, setSortNotesStory, setAppPasswordStory } from '../../storage';
 
 import {
   CHANGE_IS_SHOW_CONTENT_NOTES,
@@ -14,6 +14,8 @@ import {
   SET_FONT_SIZE,
   SET_SORT_NOTES,
   SET_LOADING,
+  SET_APP_PASSWORD,
+  IS_AUTH,
 } from '../types'
 
 export const OptionsAppState = ({ children }) => {
@@ -25,6 +27,8 @@ export const OptionsAppState = ({ children }) => {
     fontFamily: fontFamilyNote[1],
     fontSize: fontSizeNote[2],
     sortNotes: sortArray[0],
+    appPassword: {},
+    isAuth: false,
   }
 
   const [state, dispatch] = useReducer(optionsAppReducer, initialState)
@@ -45,6 +49,10 @@ export const OptionsAppState = ({ children }) => {
 
   const setLoading = loading => dispatch({ type: SET_LOADING, loading })
 
+  const setAppPassword = appPass => setAppPasswordStory(appPass).then( () => dispatch({ type: SET_APP_PASSWORD, appPass }) )
+
+  const setIsAuth = auth => dispatch({ type: IS_AUTH, auth })
+
   return <OptionsAppContext.Provider value={{
     loading: state.loading,
     isShowContentNotes: state.isShowContentNotes,
@@ -53,6 +61,8 @@ export const OptionsAppState = ({ children }) => {
     fontFamily: state.fontFamily,
     fontSize: state.fontSize,
     sortNotes: state.sortNotes,
+    appPassword: state.appPassword,
+    isAuth: state.isAuth,
 
     changeIsShowContentNotes,
     changeTypeNote,
@@ -61,6 +71,8 @@ export const OptionsAppState = ({ children }) => {
     setFontSize,
     setSortNote,
     setLoading,
+    setAppPassword,
+    setIsAuth,
   }}
   >{children}</OptionsAppContext.Provider>
 }

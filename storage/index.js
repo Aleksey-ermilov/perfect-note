@@ -15,6 +15,9 @@ export const setFontSizeStory = async (fontSize) => await AsyncStorage.setItem('
 export const getSortNotesStory = async () => await AsyncStorage.getItem('sort');
 export const setSortNotesStory = async (sort) => await AsyncStorage.setItem('sort', JSON.stringify(sort));
 
+export const getAppPasswordStory = async () => await AsyncStorage.getItem('appPassword');
+export const setAppPasswordStory = async (appPassword) => await AsyncStorage.setItem('appPassword', JSON.stringify(appPassword));
+
 export const getStorage = async(keys) => {
   const entries = await AsyncStorage.multiGet(keys);
   return entries.reduce((obj, arr) => {

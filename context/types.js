@@ -6,6 +6,8 @@ export const SET_FONT_FAMILY = 'SET_FONT_FAMILY'
 export const SET_FONT_SIZE = 'SET_FONT_SIZE'
 export const SET_SORT_NOTES = 'SET_SORT_NOTES'
 export const SET_LOADING = 'SET_LOADING'
+export const SET_APP_PASSWORD = 'SET_APP_PASSWORD'
+export const IS_AUTH = 'IS_AUTH'
 
 //NoteState
 export const NEW_CATEGORY = 'NEW_CATEGORY'
