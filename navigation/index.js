@@ -5,7 +5,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { CustomDrawerContent } from './DrawerContent';
 
 import MainStack from './MainStack';
-import AboutStack from './AboutStack';
 import TrashStack from './TrashStack';
 import OptionsStack from './OptionsStack';
 import LockedStack from './LockedStack';
@@ -36,7 +35,6 @@ export default function Navigation() {
         >
           <Drawer.Screen initialParams={{ category: '1' }} name="MainStack" component={MainStack}/>
           <Drawer.Screen name="TrashStack" component={TrashStack}/>
-          <Drawer.Screen name="AboutStack" component={AboutStack}/>
           <Drawer.Screen name="OptionsStack" component={OptionsStack}/>
         </Drawer.Navigator>
         :

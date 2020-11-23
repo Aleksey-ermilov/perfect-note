@@ -22,3 +22,9 @@ export const LOAD_NOTES = 'LOAD_NOTES'
 //ModalState
 export const SHOW_MODAL = 'SHOW_MODAL'
 export const HIDDEN_MODAL = 'HIDDEN_MODAL'
+
+//UserState
+export const REG = 'REG'
+export const LOGIN = 'LOGIN'
+export const LOGOUT = 'LOGOUT'
+export const UPDATE_USER = 'UPDATE_USER'

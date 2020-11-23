@@ -14,15 +14,12 @@ import {
   LOAD_NOTES,
 } from '../types'
 
-import { data, categories } from '../../data';
-
+import { Http } from '../../http';
 import { DB } from '../../db';
 
 export const NoteState = ({ children }) => {
   const initialState = {
-    // notes:data,
     notes: [],
-    // categories: categories,
     categories: [],
   }
   const [state, dispatch] = useReducer(noteReducer, initialState)
@@ -35,16 +32,9 @@ export const NoteState = ({ children }) => {
   const removeCategory = (id) => DB.removeCategory(id).then(() => dispatch({ type: REMOVE_CATEGORY, id}) )
 
   const addNote = (note) =>  DB.createNote(note).then( id => dispatch({ type: ADD_NOTE, note: {...note, id} }) )
-  // const addNote = (note) => dispatch({ type: ADD_NOTE, note})
-
   const removeNote = (note) => DB.removeNote(note.id).then( () => dispatch({ type: REMOVE_NOTE, id: note.id}) )
-  // const removeNote = (note) => dispatch({ type: REMOVE_NOTE, note})
-
   const updateNote = (note) => DB.updateNote(note).then( () => dispatch({ type: UPDATE_NOTE, note}) )
-  // const updateNote = (note) => dispatch({ type: UPDATE_NOTE, note})
-
   const removeAllTrash = () => DB.removeAllNotesTrash().then( () => dispatch({ type: REMOVE_ALL_TRASH}) )
-  // const removeAllTrash = () => dispatch({ type: REMOVE_ALL_TRASH})
 
   return <NoteContext.Provider value={{
     notes: state.notes,

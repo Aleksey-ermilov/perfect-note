@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
-import { ImageBackground, Text, View, Alert, TouchableOpacity } from 'react-native';
+import { ImageBackground, Text, View, Alert, TouchableOpacity, FlatList } from 'react-native';
 import { Drawer } from 'react-native-paper';
-import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
+import { DrawerContentScrollView, DrawerItem, DrawerItemList, DrawerContent } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { format } from 'date-fns';
@@ -13,6 +13,7 @@ import { trimString } from '../helpers';
 
 import { _Modal } from '../src/comonents/Modal';
 import { NewCategoryModal } from '../src/comonents/bodyModal/NewCategoryModal';
+import { LoginModal } from '../src/comonents/bodyModal/LoginModal';
 
 export const CustomDrawerContent = (props) => {
   const { categories, newCategory, removeCategory } = useContext(NoteContext);
@@ -28,14 +29,24 @@ export const CustomDrawerContent = (props) => {
         </_Modal>
       );
     }
+    if (Component === 'loginModal') {
+      return (
+        <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
+          <LoginModal push={pushRegPage} />
+        </_Modal>
+      );
+    }
   };
+  const pushRegPage = () => {
+    props.navigation.navigate('OptionsStack', { screen: 'RegPage' })
+    setFocus('MainPage1')
+  }
 
   const getText = category => {
     // console.log('added category', category);
     newCategory(category);
   };
   const handlerRemoveCategory = item => {
-    // removeCategory(item)
     Alert.alert(
       "Удаление Категории",
       "Если Вы удалите категорию, то всё записи будут добавлены корзину",
@@ -63,6 +74,11 @@ export const CustomDrawerContent = (props) => {
 
 
   return (
+    <View style={{
+      flex: 1,
+      // flexDirection: 'row',
+      justifyContent: 'space-between',
+    }}>
     <DrawerContentScrollView {...props}>
 
       {selectorModal()}
@@ -187,22 +203,6 @@ export const CustomDrawerContent = (props) => {
           {...props}
         />
         <DrawerItem
-          label='О приложении'
-          onPress={() => {
-            setFocus('AboutStack');
-            props.navigation.navigate('AboutStack', { screen: 'AboutPage' });
-          }}
-          focused={focus === 'AboutStack' ? true : false}
-          icon={({ color, size }) => (
-            <Icon
-              name="information-outline"
-              color={color}
-              size={30}
-            />
-          )}
-          {...props}
-        />
-        <DrawerItem
           label='Настройки'
           onPress={() => {
             setFocus('OptionsStack');
@@ -224,5 +224,41 @@ export const CustomDrawerContent = (props) => {
 
       {/*<DrawerItemList {...props} />*/}
     </DrawerContentScrollView>
+
+      <Drawer.Section>
+        <DrawerItem
+          label='Войти'
+          onPress={() => {
+            showModal('loginModal')
+            // props.navigation.navigate('OptionsStack', { screen: 'OptionsPage' });
+          }}
+          icon={({ color, size }) => (
+            <Icon
+              name="login"
+              color={color}
+              size={30}
+            />
+          )}
+          {...props}
+        />
+      <DrawerItem
+        label='Выйти'
+        onPress={() => {
+          console.log('logout');
+          // props.navigation.navigate('OptionsStack', { screen: 'OptionsPage' });
+        }}
+        icon={({ color, size }) => (
+          <Icon
+            name="logout"
+            color={color}
+            size={30}
+            style={{ transform: [{ rotate: "180deg" }] }}
+          />
+        )}
+        {...props}
+      />
+
+      </Drawer.Section>
+    </View>
   );
 };

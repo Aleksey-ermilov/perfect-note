@@ -4,7 +4,6 @@ import { ModalContext } from '../context';
 import { modalReducer } from './modalReducer';
 
 import { SHOW_MODAL, HIDDEN_MODAL } from '../types';
-import { Button, Text } from 'react-native';
 
 export const ModalState = ({ children }) => {
   const initialState = {

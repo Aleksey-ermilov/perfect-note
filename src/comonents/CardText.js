@@ -12,6 +12,7 @@ export const CardText = ({text, description, onPress, ComponentRight = () => <><
       <List.Item
         title={text}
         description={description}
+        titleStyle={{fontSize:18}}
         right = {(props) => <ComponentRight {...props} style={styles.right} />}
       />
     </TouchableRipple>
