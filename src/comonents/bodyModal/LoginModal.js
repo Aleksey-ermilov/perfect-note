@@ -2,31 +2,31 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { HelperText } from 'react-native-paper';
 
-import { ModalContext, OptionsAppContext } from '../../../context/context';
+import { ModalContext, OptionsAppContext, UserContext } from '../../../context/context';
 
 import { _Button } from '../Button';
 
 export const LoginModal = ({ push }) => {
   const { appColor } = useContext(OptionsAppContext);
   const { hiddenModal } = useContext(ModalContext);
+  const { login, error } = useContext(UserContext)
 
   const [ email, setEmail ] = useState('')
   const [ pass, setPass ] = useState('')
-  const refPass = useRef('');
 
-  const [ error, setError ] = useState({ flag: false, text: '' })
+  const [ errorView, setErrorView ] = useState({ flag: false, text: '' })
 
-  // useEffect(()=> {
-  //   if (refPass.current !== pass){
-  //     setError({flag: false, text: ''})
-  //   }
-  // },[pass])
+  useEffect(()=> {
+    setErrorView({flag: false, text: ''})
+  },[email, pass])
 
-  const handlerButtonLogin = () => {
-    // refPass.current = pass
-    // setError({flag: true, text: 'Пароли не совпадают'})
-    hiddenModal()
-
+  const handlerButtonLogin = async () => {
+    await login(email.trim(),pass.trim())
+    if (error){
+      setErrorView({flag: true, text: error})
+    }else {
+      hiddenModal()
+    }
   }
 
   const handlerButtonRegistration = () => {
@@ -37,7 +37,6 @@ export const LoginModal = ({ push }) => {
   return (
     <View style={styles.container}>
       <View style={{alignItems:'flex-end',paddingVertical:5}}>
-        {/*<_Button onPress={handlerButtonRegistration} title={'Зарегистрироваться'} />*/}
         <TouchableOpacity onPress={handlerButtonRegistration} >
           <Text style={{color: appColor, fontSize: 15}}>Зарегистрироваться</Text>
         </TouchableOpacity>
@@ -57,8 +56,8 @@ export const LoginModal = ({ push }) => {
         placeholder={'Пароль...'}
         secureTextEntry={true}
       />
-      <HelperText type="error" visible={error.flag}>
-        {error.text}
+      <HelperText type="error" visible={errorView.flag}>
+        {errorView.text}
       </HelperText>
 
       <_Button onPress={handlerButtonLogin} title={'Войти'} />

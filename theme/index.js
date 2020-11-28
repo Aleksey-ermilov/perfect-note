@@ -2,6 +2,16 @@ import { enUS, ru } from 'date-fns/locale';
 
 export const sizeIconDrawer = 30
 
+export const firebaseConfig = {
+  apiKey: "AIzaSyAWdV7l338-3odaDJ_0RirbS_XIB50GXao",
+  authDomain: "perfect-note.firebaseapp.com",
+  databaseURL: "https://perfect-note.firebaseio.com",
+  projectId: "perfect-note",
+  storageBucket: "perfect-note.appspot.com",
+  messagingSenderId: "1068445423582",
+  appId: "1:1068445423582:web:83ca4e0c2655acbb1b6f4f"
+};
+
 export const dateLocale = {
   ru: ru,
   en: enUS,

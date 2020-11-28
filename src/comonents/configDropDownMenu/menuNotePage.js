@@ -21,7 +21,7 @@ export const menuNotePage = (showModal, updateNote, route, navigation, typeNote,
       },
     },
     { onPress: () => console.log('Напоминание'), children: TextMenu('Напоминание') },
-    { onPress: () => console.log('Добавить изображение'), children: TextMenu('Добавить изображение') },
+    // { onPress: () => console.log('Добавить изображение'), children: TextMenu('Добавить изображение') },
     {
       children: TextMenu('Удалить'), onPress: () => {
         const note = route.params.note;

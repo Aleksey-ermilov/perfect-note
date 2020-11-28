@@ -27,6 +27,6 @@ export default function _SnackBar({ setSnackbar, snackbar }) {
 const styles = StyleSheet.create({
   container: {
     padding:5,
-    height:100
+    height:110
   },
 });

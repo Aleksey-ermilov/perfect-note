@@ -18,7 +18,7 @@ import { compareNotes } from '../../helpers';
 import { sortArray } from '../../theme';
 
 const MainPage = ({ navigation, route }) => {
-  const { notes, updateNote } = useContext(NoteContext);
+  const { notes, updateNote, categories } = useContext(NoteContext);
   const { changeTypeNote, sortNotes, setSortNote } = useContext(OptionsAppContext);
   const { isVisibleModal, showModal, Component, hiddenModal } = useContext(ModalContext);
 

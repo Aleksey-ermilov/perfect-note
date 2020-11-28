@@ -6,7 +6,10 @@ import {
   REMOVE_CATEGORY,
   REMOVE_ALL_TRASH,
   LOAD_CATEGORIES,
-  LOAD_NOTES
+  LOAD_NOTES,
+  LOAD_USER_DATA,
+  REMOVE_ALL_CATEGORIES,
+  REMOVE_ALL_NOTES,
 } from '../types';
 
 const handlers = {
@@ -87,6 +90,19 @@ const handlers = {
     };
     // return state
   },
+  [LOAD_USER_DATA]: (state, { user : {notes, categories} }) => ({
+    ...state,
+    notes,
+    categories
+  }),
+  [REMOVE_ALL_NOTES]: (state, action ) => ({
+    ...state,
+    notes: [],
+  }),
+  [REMOVE_ALL_CATEGORIES]: (state, action ) => ({
+    ...state,
+    categories: state.categories.filter( cat => cat.id === '1' ),
+  }),
   DEFAULT: state => state,
 };
 

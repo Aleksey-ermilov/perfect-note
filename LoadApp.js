@@ -2,13 +2,16 @@ import React, { useEffect, useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 
-import { NoteContext, OptionsAppContext } from './context/context';
+import { NoteContext, OptionsAppContext, UserContext } from './context/context';
 
 import { getAppColorStory, getFontSizeStory, getFontFamilyStory, getSortNotesStory, getAppPasswordStory } from './storage';
 import { DB } from './db'
 
+import firebase from 'firebase';
+
 export const LoadApp = ({ children }) => {
   const { loadCategories, loadNotes } = useContext(NoteContext);
+  const { getUserAtRerun } = useContext(UserContext);
   const {
     loading,
     appColor,
@@ -24,6 +27,9 @@ export const LoadApp = ({ children }) => {
   useEffect( () => {
 
     ( async function f () {
+
+      await getUserAtRerun()
+
       setLoading(true)
       await getAppColorStory().then( color => {
         if(color){
@@ -64,8 +70,8 @@ export const LoadApp = ({ children }) => {
       // await DB.dropNotesTable().then(() => console.log('drop table notes'))
 
       await DB.init().then(() => console.log('DB init') )
-      await DB.getCategories().then( categories => loadCategories(categories) )
-      await DB.getNotes().then( notes => loadNotes(notes) )
+      await loadCategories()
+      await loadNotes()
       setLoading(false)
     })()
   }, [])

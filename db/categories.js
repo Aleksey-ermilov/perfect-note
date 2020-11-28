@@ -61,6 +61,19 @@ export class Categories {
     })
   }
 
+  static removeAllCategories () {
+    return new Promise( (resolve,reject) => {
+      db.transaction( tx => {
+        tx.executeSql(
+          'DELETE FROM categories WHERE id > 1',
+          [],
+          resolve,
+          ( _, error ) => reject(error)
+        )
+      })
+    })
+  }
+
   static dropCategoriesTable () {
     return new Promise( (resolve,reject) => {
       db.transaction( tx => {
@@ -70,6 +83,22 @@ export class Categories {
           resolve,
           ( _, error ) => reject(error)
         )
+      })
+    })
+  }
+
+  static setCategories(categories) {
+    return new Promise( (resolve,reject) => {
+      db.transaction( tx => {
+        tx.executeSql('DELETE FROM categories')
+        categories.map( ({category}) => {
+          tx.executeSql(
+            `INSERT INTO categories (category, id) VALUES (?,?)`,
+            [category],
+            ( _, result ) => resolve( result.insertId.toString() ),
+            ( _, error ) => reject(error)
+          )
+        })
       })
     })
   }

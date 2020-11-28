@@ -9,13 +9,14 @@ export const ContextWrapper = ({ children }) => {
 
   return (
     <OptionsAppState>
-      <UserState>
-        <NoteState>
+      <NoteState>
+        <UserState>
           <ModalState>
             {children}
           </ModalState>
-        </NoteState>
-      </UserState>
+        </UserState>
+      </NoteState>
     </OptionsAppState>
-  );
+  )
+    ;
 };

@@ -62,6 +62,9 @@ export class DB {
   static dropNotesTable() {
     return Notes.dropNotesTable()
   }
+  static removeAllNotes () {
+    return Notes.removeAllNotes()
+  }
 
 
   static getCategories () {
@@ -78,6 +81,17 @@ export class DB {
       Notes.updateCategoryAllNotesWithCategory(id).then( () => {
         Categories.removeCategory(id).then(resolve)
       })
+    })
+  }
+  static removeAllCategories () {
+    return Categories.removeAllCategories()
+  }
+
+
+  static setUserData (notes,categories,) {
+    return new Promise( (resolve,reject) => {
+      Categories.setCategories(categories).catch( e => console.log('setUserData categories error', e) )
+      Notes.setNotes(notes).catch( e => console.log('setUserData notes error', e) )
     })
   }
 }
