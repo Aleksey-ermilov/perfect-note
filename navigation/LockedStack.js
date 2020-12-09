@@ -16,8 +16,8 @@ export default function LockedStack() {
     <Stack.Navigator
       initialRouteName="LockedPage"
       screenOptions={{
-        headerStyle: { backgroundColor: appColor },
-        headerTintColor: colors.text,
+        headerStyle: { backgroundColor: appColor.appColor },
+        headerTintColor: appColor.text,
         headerTitleStyle: { fontWeight: 'bold' },
       }}
     >

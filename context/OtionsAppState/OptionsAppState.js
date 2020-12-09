@@ -23,7 +23,7 @@ export const OptionsAppState = ({ children }) => {
     loading: true,
     isShowContentNotes: false,
     typeNote: 'text',
-    appColor: appColors[4].color,
+    appColor: appColors[4],
     fontFamily: fontFamilyNote[1],
     fontSize: fontSizeNote[2],
     sortNotes: sortArray[0],

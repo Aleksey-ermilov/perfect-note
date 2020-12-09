@@ -22,7 +22,7 @@ export const NewCategoryModal = ({ getText }) => {
       <TextInput
         value={value}
         onChangeText={ text => setValue(text)}
-        style={{ ...styles.text, borderColor: appColor }}
+        style={{ ...styles.text, borderColor: appColor.appColor }}
         autoFocus={true}
         placeholder={'Категория...'}
       />

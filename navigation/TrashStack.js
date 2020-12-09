@@ -24,8 +24,8 @@ export default function AboutStack() {
     <Stack.Navigator
       initialRouteName="TrashPage"
       screenOptions={{
-        headerStyle: { backgroundColor: appColor },
-        headerTintColor: colors.text,
+        headerStyle: { backgroundColor: appColor.appColor },
+        headerTintColor: appColor.text,
         headerTitleStyle: { fontWeight: 'bold' },
       }}
     >

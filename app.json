@@ -4,9 +4,9 @@
     "slug": "perfect-note",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon-perfect-note-2.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash-perfect-note-3.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,6 +18,8 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
     },
     "web": {
       "favicon": "./assets/favicon.png"

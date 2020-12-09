@@ -22,7 +22,7 @@ export const CheckPasswordNoteModal = ({ getCheckPass }) => {
       <TextInput
         value={pass}
         onChangeText={ text => setPass(text)}
-        style={{ ...styles.text, borderColor: appColor }}
+        style={{ ...styles.text, borderColor: appColor.appColor }}
         autoFocus={true}
         placeholder={'Пароль...'}
         secureTextEntry={true}

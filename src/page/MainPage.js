@@ -16,6 +16,7 @@ import { ModalContext, NoteContext, OptionsAppContext } from '../../context/cont
 
 import { compareNotes } from '../../helpers';
 import { sortArray } from '../../theme';
+import { FindModal } from '../comonents/bodyModal/FindModal';
 
 const MainPage = ({ navigation, route }) => {
   const { notes, updateNote, categories } = useContext(NoteContext);
@@ -25,6 +26,7 @@ const MainPage = ({ navigation, route }) => {
   const [snackbar, setSnackbar] = useState({});
   const [ selectedNote, setSelectedNote] = useState()
   const [ notesCategory, setNotesCategory ] = useState([])
+  const [ find, setFind] = useState('')
 
   const { category } = route.params
 
@@ -37,7 +39,14 @@ const MainPage = ({ navigation, route }) => {
       setNotesCategory( sortedNotes.filter(note => note.category === category) )
     }
 
-  },[category,notes,sortNotes])
+    if (find !== ''){
+      setNotesCategory( prev => prev.filter( note => {
+        const text = `${note.text.map( t => t.content).join(' ')} ${note.title}`
+        return text.includes(find)
+      }))
+    }
+
+  },[category,notes,sortNotes,find])
 
   const selectorModal = () => {
     if (Component === 'SortModal') {
@@ -61,6 +70,13 @@ const MainPage = ({ navigation, route }) => {
         </_Modal>
       );
     }
+    if (Component === 'FineModal') {
+      return (
+        <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
+          <FindModal getValue={getFind} />
+        </_Modal>
+      );
+    }
   };
   const getSort = (sort) => {
     setSortNote(sort);
@@ -74,6 +90,7 @@ const MainPage = ({ navigation, route }) => {
       navigation.push('NotePage', { note: selectedNote })
     }
   };
+  const getFind = value => setFind(value)
 
   const createNote = (type) => {
     console.log('type new note', type)

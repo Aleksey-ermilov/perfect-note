@@ -32,7 +32,7 @@ export const TextInputModal = ({ firstValue = '', getValue, placeholder }) => {
       <TextInput
         value={value}
         onChangeText={text => setValue(text)}
-        style={{ ...styles.text, borderColor: appColor }}
+        style={{ ...styles.text, borderColor: appColor.appColor }}
         autoFocus={true}
         placeholder={placeholder}
       />

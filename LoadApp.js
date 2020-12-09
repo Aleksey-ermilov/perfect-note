@@ -7,11 +7,10 @@ import { NoteContext, OptionsAppContext, UserContext } from './context/context';
 import { getAppColorStory, getFontSizeStory, getFontFamilyStory, getSortNotesStory, getAppPasswordStory } from './storage';
 import { DB } from './db'
 
-import firebase from 'firebase';
 
 export const LoadApp = ({ children }) => {
   const { loadCategories, loadNotes } = useContext(NoteContext);
-  const { getUserAtRerun } = useContext(UserContext);
+  const { getUserAfterRerun } = useContext(UserContext);
   const {
     loading,
     appColor,
@@ -28,7 +27,6 @@ export const LoadApp = ({ children }) => {
 
     ( async function f () {
 
-      await getUserAtRerun()
 
       setLoading(true)
       await getAppColorStory().then( color => {
@@ -72,11 +70,14 @@ export const LoadApp = ({ children }) => {
       await DB.init().then(() => console.log('DB init') )
       await loadCategories()
       await loadNotes()
+
+      await getUserAfterRerun()
+
       setLoading(false)
     })()
   }, [])
 
-  if (loading) return <View style={styles.noNotes}><ActivityIndicator animating={true} size={'large'} color={appColor} /></View>
+  if (loading) return <View style={styles.noNotes}><ActivityIndicator animating={true} size={'large'} color={appColor.appColor} /></View>
 
   return (
     <>

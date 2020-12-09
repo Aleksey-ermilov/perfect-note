@@ -14,14 +14,14 @@ export const ColorModal = ({ getColor, listColors }) => {
     getColor(color)
   };
 
-  const renderItem = ({ item }) => <ColorBox color={item.color} getColor={selectedColor} />
+  const renderItem = ({ item }) => <ColorBox color={item} getColor={selectedColor} />
 
   return (
     <View style={styles.container}>
       <FlatList
         data={listColors}
         renderItem={renderItem}
-        keyExtractor={item => item.color}
+        keyExtractor={item => item.appColor}
         numColumns={3}
         columnWrapperStyle={{ justifyContent: 'space-around' }}
       />

@@ -1,4 +1,6 @@
 // OptionsAppState
+import { exp } from 'react-native-reanimated';
+
 export const CHANGE_IS_SHOW_CONTENT_NOTES = 'CHANGE_IS_SHOW_CONTENT_NOTES'
 export const CHANGE_TYPE_NOTE = 'CHANGE_TYPE_NOTE'
 export const SET_APP_COLOR = 'SET_APP_COLOR'
@@ -35,3 +37,4 @@ export const SET_ERROR = 'SET_ERROR'
 export const CLEAR_ERROR = 'CLEAR_ERROR'
 export const LOAD_USER_NOTES = 'LOAD_USER_NOTES'
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD'
+export const SET_USER_ICON = 'SET_USER_ICON'

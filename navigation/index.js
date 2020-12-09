@@ -23,13 +23,13 @@ export default function Navigation() {
         <Drawer.Navigator
           initialRouteName="MainStack"
           drawerStyle={{
-            backgroundColor: appColor,
-            color: colors.text,
+            backgroundColor: appColor.appColor,
+            color: appColor.text,
           }}
           drawerContentOptions={{
-            activeTintColor: colors.text,
-            activeBackgroundColor: colors.backgroundDrawerInactiveItem,
-            inactiveTintColor: colors.text,
+            activeTintColor: appColor.text,
+            activeBackgroundColor: appColor.drawer,
+            inactiveTintColor: appColor.text,
           }}
           drawerContent={props => <CustomDrawerContent {...props} />}
         >

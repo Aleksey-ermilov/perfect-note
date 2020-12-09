@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { format } from 'date-fns';
 
-import { ModalContext, NoteContext, UserContext } from '../context/context';
+import { ModalContext, NoteContext, OptionsAppContext, UserContext } from '../context/context';
 
 import { colors, sizeIconDrawer, dateLocale, sortArray } from '../theme';
 import { trimString } from '../helpers';
@@ -19,6 +19,7 @@ export const CustomDrawerContent = (props) => {
   const { categories, newCategory, removeCategory } = useContext(NoteContext);
   const { isVisibleModal, showModal, Component, hiddenModal } = useContext(ModalContext);
   const { logout, user } = useContext(UserContext);
+  const { appColor, } = useContext(OptionsAppContext);
 
   const [focus, setFocus] = useState('MainPage1');
 
@@ -120,7 +121,7 @@ export const CustomDrawerContent = (props) => {
             color={'#fff'}
             size={sizeIconDrawer}
           />
-          <Text style={{ color: colors.text, marginLeft: 30, fontSize: 16 }}>Категории</Text>
+          <Text style={{ color: appColor.text, marginLeft: 30, fontSize: 16 }}>Категории</Text>
         </View>
 
         <Drawer.Section>

@@ -5,7 +5,7 @@ export const menuTrashPade = (isShowContentNotes, changeIsShowContentNotes, remo
   return [
 
     {
-      children: CheckboxMenu('Показать содержимое', isShowContentNotes, changeIsShowContentNotes, appColor),
+      children: CheckboxMenu('Показать содержимое', isShowContentNotes, changeIsShowContentNotes, appColor.appColor),
       onPress: () => {
         // console.log('Показать содержимое');
         changeIsShowContentNotes();

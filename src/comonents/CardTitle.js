@@ -18,7 +18,7 @@ export const CardTitle = ({title, subtitle, icon, onPress}) => {
       <Card.Title
         title={title}
         subtitle={subtitle}
-        left={(props) => <Icon name={icon} color={appColor} size={sizeIconDrawer} /> }
+        left={(props) => <Icon name={icon} color={appColor.appColor} size={sizeIconDrawer} /> }
       />
       <Divider />
       </>

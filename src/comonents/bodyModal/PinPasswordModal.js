@@ -12,31 +12,21 @@ export const PinPasswordAppModal = ({ getPinPassword }) => {
 
   const [ pass, setPass ] = useState('')
   const [ rePass, setRePass ] = useState('')
-  const refPass = useRef('');
-  const refRePass = useRef('');
 
   const [ error, setError ] = useState({ flag: false, text: '' })
 
   useEffect(()=> {
-    if (refPass.current !== pass){
       setError({flag: false, text: ''})
-    }
-    if (refRePass.current !== rePass){
-      setError({flag: false, text: ''})
-    }
   },[pass,rePass])
 
   const handlerButton = () => {
-    refPass.current = pass
     if (pass.length < 4){
       setError({flag: true, text: 'Должно быть 4 цифры'})
       return
     }
     if (rePass !== pass){
-      refRePass.current = rePass
       setError({flag: true, text: 'Пароли не совпадают'})
     }else{
-      setError({flag: false, text: ''})
       getPinPassword(pass)
       hiddenModal()
     }
@@ -48,7 +38,7 @@ export const PinPasswordAppModal = ({ getPinPassword }) => {
       <TextInput
         value={pass}
         onChangeText={ text => setPass(text)}
-        style={{ ...styles.text, borderColor: appColor }}
+        style={{ ...styles.text, borderColor: appColor.appColor }}
         autoFocus={true}
         placeholder={'PIN-код...'}
         secureTextEntry={true}
@@ -58,7 +48,7 @@ export const PinPasswordAppModal = ({ getPinPassword }) => {
       <TextInput
         value={rePass}
         onChangeText={ text => setRePass(text)}
-        style={{ ...styles.text, borderColor: appColor }}
+        style={{ ...styles.text, borderColor: appColor.appColor }}
         placeholder={'Повторить PIN-код...'}
         secureTextEntry={true}
         maxLength={4}

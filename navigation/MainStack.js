@@ -27,8 +27,8 @@ export default function MainStack({ navigation, route }) {
     <Stack.Navigator
       initialRouteName="MainPage"
       screenOptions={{
-        headerStyle: { backgroundColor: appColor },
-        headerTintColor: colors.text,
+        headerStyle: { backgroundColor: appColor.appColor },
+        headerTintColor: appColor.text,
         headerTitleStyle: { fontWeight: 'bold' },
       }}
     >

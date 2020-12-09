@@ -21,7 +21,7 @@ const NotePage = ({ navigation, route }) => {
       text: [{ content: ``, completed: false, id: '1' }],
       itemBackground: '#fff',
       category: '1',
-      date: new Date().toString(),
+      date: new Date().getTime().toString(),
       type: typeNote,
       password: '',
       isTrash: false,
@@ -63,7 +63,7 @@ const NotePage = ({ navigation, route }) => {
     };
 
     const getColor = (color) => {
-      setNote(prev => ({ ...prev, itemBackground: color }));
+      setNote(prev => ({ ...prev, itemBackground: color.appColor }));
     };
     const getCategory = (category) => {
       console.log('getCategory', category);
@@ -154,7 +154,7 @@ const NotePage = ({ navigation, route }) => {
               fontSize: (+fontSize.id + 6),
             }}
           />
-          <Divider style={{ backgroundColor: appColor }}/>
+          <Divider style={{ backgroundColor: appColor.appColor }}/>
           {note.type === 'text' ?
             <TextInput
               value={text}

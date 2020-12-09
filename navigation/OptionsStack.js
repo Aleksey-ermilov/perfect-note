@@ -25,8 +25,8 @@ export default function OptionsStack() {
     <Stack.Navigator
       initialRouteName="OptionsPage"
       screenOptions={{
-        headerStyle: { backgroundColor: appColor },
-        headerTintColor: colors.text,
+        headerStyle: { backgroundColor: appColor.appColor },
+        headerTintColor: appColor.text,
         headerTitleStyle: { fontWeight: 'bold' },
       }}
     >

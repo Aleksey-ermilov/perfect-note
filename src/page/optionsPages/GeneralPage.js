@@ -49,7 +49,7 @@ const GeneralPage = ({ navigation }) => {
   const touchFontFamilyNote = () => { showModal('FontFamilyNote') };
   const touchFontSizeNote = () => { showModal('FontSizeNote') };
 
-  const ColorBox = () => <View style={{...styles.colorBox, backgroundColor: appColor,}}></View>
+  const ColorBox = () => <View style={{...styles.colorBox, backgroundColor: appColor.appColor,}}></View>
   const TextFontFamily = props => <Text {...props} >{ fontFamily.text }</Text>
   const TextFontSize = props => <Text {...props} >{ fontSize.text }</Text>
   return (

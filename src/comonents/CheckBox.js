@@ -27,7 +27,7 @@ export const CheckBox = ({ note, onChangeText, onChecked, removeCheckBox, addChe
         <Checkbox
           status={item.completed ? 'checked' : 'unchecked'}
           onPress={() => onChecked( item.id )}
-          color={appColor}
+          color={appColor.appColor}
         />
         <View style={{ flex: 1 }}>
           <TextInput
@@ -67,7 +67,7 @@ export const CheckBox = ({ note, onChangeText, onChecked, removeCheckBox, addChe
         keyExtractor={item => item.id.toString()}
       />
 
-      { yesCompleted.length >= 1 && <Divider style={{ marginHorizontal: 10, backgroundColor: appColor }}/>}
+      { yesCompleted.length >= 1 && <Divider style={{ marginHorizontal: 10, backgroundColor: appColor.appColor }}/>}
 
       <FlatList
         data={yesCompleted}

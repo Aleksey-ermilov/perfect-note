@@ -25,8 +25,8 @@ export const _Fab = ({ navigation, createNote }) => {
                 // navigation.push('NotePage');
                 createNote('text')
               },
-              color: colors.text,
-              style: { ...styles.itemFab, backgroundColor: appColor },
+              color: appColor.text,
+              style: { ...styles.itemFab, backgroundColor: appColor.appColor },
             },
             {
               icon: 'check-box-multiple-outline',
@@ -35,12 +35,12 @@ export const _Fab = ({ navigation, createNote }) => {
                 createNote('list')
                 // navigation.push('NotePage');
               },
-              color: colors.text,
-              style: { ...styles.itemFab, backgroundColor: appColor },
+              color: appColor.text,
+              style: { ...styles.itemFab, backgroundColor: appColor.appColor },
             },
           ]}
-          color={colors.text}
-          fabStyle={{ ...styles.fab, backgroundColor: appColor }}
+          color={appColor.text}
+          fabStyle={{ ...styles.fab, backgroundColor: appColor.appColor }}
           onStateChange={ ({ open }) => setOpen(open)}
         />
       </Portal>

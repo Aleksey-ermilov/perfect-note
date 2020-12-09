@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { View, StyleSheet, Alert, SafeAreaView } from 'react-native';
-import { Avatar, Title, Caption, Text, Paragraph, Divider } from 'react-native-paper';
+import { Avatar, Title, Caption, TouchableRipple, Paragraph, Divider } from 'react-native-paper';
 
 import { ModalContext, NoteContext, OptionsAppContext, UserContext } from '../../../context/context';
 
 import { format } from 'date-fns';
-import { colors, dateLocale } from '../../../theme';
+import { colors, dateLocale, avatarIcons } from '../../../theme';
 
 import { CardText } from '../../comonents/CardText';
 
@@ -15,12 +15,13 @@ import { TextInputModal } from '../../comonents/bodyModal/TextInputModal';
 import _SnackBar from '../../comonents/_SnackBar';
 import { _Button } from '../../comonents/Button';
 import { LoginModal } from '../../comonents/bodyModal/LoginModal';
+import { AvatarIconModal } from '../../comonents/bodyModal/AvatarIconModal';
 
 const UserPage = ({ navigation }) => {
   const { isVisibleModal, showModal, Component, hiddenModal } = useContext(ModalContext);
   const { notes, categories, loadCategories, loadNotes, } = useContext(NoteContext);
   const { appColor } = useContext(OptionsAppContext);
-  const { user, update, loadUserNotes, changePassword, removeUser } = useContext(UserContext);
+  const { user, update, loadUserNotes, changePassword, removeUser, setUserIcon } = useContext(UserContext);
 
   const [snackbar, setSnackbar] = useState({});
 
@@ -46,6 +47,13 @@ const UserPage = ({ navigation }) => {
         </_Modal>
       );
     }
+    if (Component === 'avatarIconModal') {
+      return (
+        <_Modal visible={isVisibleModal} changeVisible={() => hiddenModal()}>
+          <AvatarIconModal getAvatar={getAvatar}/>
+        </_Modal>
+      );
+    }
   };
   const getUserPassword = async pass => {
     console.log('app pass', pass);
@@ -58,6 +66,10 @@ const UserPage = ({ navigation }) => {
       login
     })
     setSnackbar({ text: 'Логин изменён успешно', isVisible: true });
+  }
+  const getAvatar = async icon => {
+    console.log('user page avatar',icon);
+    await setUserIcon(user,icon)
   }
 
   const touchChangeLogin = () => {
@@ -133,6 +145,9 @@ const UserPage = ({ navigation }) => {
   const touchBtnLogin = () => {
     showModal('loginModal');
   }
+  const touchAvatarIcon = () => {
+    showModal('avatarIconModal')
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -147,14 +162,17 @@ const UserPage = ({ navigation }) => {
       {
         user ?
           <>
+            <TouchableRipple onPress={touchAvatarIcon}>
             <View style={{ paddingLeft: 30 }}>
+
               <View style={{ flexDirection: 'row', marginTop: 15 }}>
-                <Avatar.Icon size={75} icon={'account-circle'}/>
+                <Avatar.Image size={75} source={avatarIcons.find(item => item.id === user.icon).icon}/>
                 <View style={{ marginLeft: 15 }}>
                   <Title>{user.login}</Title>
                   <Caption>{user.email}</Caption>
                 </View>
               </View>
+
               <View style={{ marginTop: 5 }}>
                 {
                   user.dateLastChange.length === 0 ?
@@ -166,7 +184,8 @@ const UserPage = ({ navigation }) => {
               </View>
 
             </View>
-            <Divider style={{ backgroundColor: appColor }}/>
+          </TouchableRipple>
+            <Divider style={{ backgroundColor: appColor.appColor }}/>
             <View style={{ marginVertical: 5 }}>
               <CardText text={'Изменить логин'} onPress={touchChangeLogin}/>
               <CardText text={'Изменить пароль'} onPress={touchChangePassword}/>

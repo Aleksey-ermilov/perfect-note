@@ -17,6 +17,6 @@ export const CheckboxMenu = (text, checkStatus = false, changeIsShowContentNotes
     <Checkbox
       status={checkStatus ? 'checked' : 'unchecked'}
       onPress={() => changeIsShowContentNotes()}
-      color={appColor}
+      color={appColor.appColor}
     />
   </View>;

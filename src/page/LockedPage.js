@@ -43,7 +43,7 @@ const LockedPage = ({ navigation }) => {
         <TextInput
           value={pin}
           onChangeText={ text => setPin(text)}
-          style={{ ...styles.text, borderColor: appColor }}
+          style={{ ...styles.text, borderColor: appColor.appColor }}
           autoFocus={true}
           placeholder={'PIN-код...'}
           secureTextEntry={true}
@@ -54,7 +54,7 @@ const LockedPage = ({ navigation }) => {
         <TextInput
         value={pass}
         onChangeText={ text => setPass(text)}
-        style={{ ...styles.text, borderColor: appColor }}
+        style={{ ...styles.text, borderColor: appColor.appColor }}
         autoFocus={true}
         placeholder={'Пароль...'}
         secureTextEntry={true}

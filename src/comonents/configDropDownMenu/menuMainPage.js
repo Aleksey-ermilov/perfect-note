@@ -11,12 +11,17 @@ export const menuMainPade = (showModal, isShowContentNotes, changeIsShowContentN
       },
     },
     {
-      children: CheckboxMenu('Показать содержимое', isShowContentNotes, changeIsShowContentNotes, appColor),
+      children: CheckboxMenu('Показать содержимое', isShowContentNotes, changeIsShowContentNotes, appColor.appColor),
       onPress: () => {
         // console.log('Показать содержимое');
         changeIsShowContentNotes();
       },
     },
-    { onPress: () => console.log('Плитка'), children: TextMenu('Плитка') },
+    { children: TextMenu(' Найти...'),
+      onPress: () => {
+        console.log('find')
+        showModal('FineModal')
+      },
+    },
   ];
 };

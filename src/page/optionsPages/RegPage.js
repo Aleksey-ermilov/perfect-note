@@ -77,7 +77,7 @@ const RegPage = ({ navigation }) => {
   const SwitchBox = () => {
     return (
       <View pointerEvents={'none'}>
-        <Switch value={isSwitchOn} color={appColor}/>
+        <Switch value={isSwitchOn} color={appColor.appColor}/>
       </View>
     );
   };
@@ -87,7 +87,7 @@ const RegPage = ({ navigation }) => {
       <TextInput
         value={login}
         onChangeText={text => setLogin(text)}
-        style={{ ...styles.text, borderColor: appColor }}
+        style={{ ...styles.text, borderColor: appColor.appColor }}
         autoFocus={true}
         placeholder={'Логин...'}
       />

@@ -104,7 +104,7 @@ const SafetyPage = ({ navigation }) => {
     });
   };
 
-  const SwitchBox = () => <Switch value={isSwitchOn} onValueChange={onToggleSwitch} color={appColor}/>;
+  const SwitchBox = () => <Switch value={isSwitchOn} onValueChange={onToggleSwitch} color={appColor.appColor}/>;
 
   const touchPassCard = () => {
 

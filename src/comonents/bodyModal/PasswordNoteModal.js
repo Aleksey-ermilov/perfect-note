@@ -13,25 +13,17 @@ export const PasswordNoteModal = ({ getPass, note }) => {
   const [ oldPass, setOldPass ] = useState('')
   const [ pass, setPass ] = useState('')
   const [ rePass, setRePass ] = useState('')
-  const refRePass = useRef('');
-  const refOldPass = useRef('');
 
   const [ error, setError ] = useState({ flag: false, text: '' })
 
   useEffect(()=> {
-    if (refRePass.current !== rePass){
-      setError({flag: false, text: ''})
-    }
-    if (refOldPass.current !== oldPass){
-      setError({flag: false, text: ''})
-    }
-  },[rePass, refOldPass])
+    setError({flag: false, text: ''})
+  },[rePass, pass, oldPass])
 
 
   const handlerButton = () => {
     if (note.password === oldPass){
       if (rePass !== pass){
-        refRePass.current = rePass
         setError({flag: true, text: 'Пароли не совпадают'})
       }else{
         setError({flag: false, text: ''})
@@ -39,10 +31,8 @@ export const PasswordNoteModal = ({ getPass, note }) => {
         hiddenModal()
       }
     }else {
-      refOldPass.current = oldPass
       setError({flag: true, text: 'Неверный старый пароль'})
     }
-
   }
 
   return (
@@ -51,7 +41,7 @@ export const PasswordNoteModal = ({ getPass, note }) => {
         <TextInput
         value={oldPass}
         onChangeText={text => setOldPass(text)}
-        style={{ ...styles.text, borderColor: appColor }}
+        style={{ ...styles.text, borderColor: appColor.appColor }}
         autoFocus={true}
         placeholder={'Старый пароль...'}
         secureTextEntry={true}
@@ -60,7 +50,7 @@ export const PasswordNoteModal = ({ getPass, note }) => {
       <TextInput
         value={pass}
         onChangeText={ text => setPass(text)}
-        style={{ ...styles.text, borderColor: appColor }}
+        style={{ ...styles.text, borderColor: appColor.appColor }}
         autoFocus={true}
         placeholder={'Новый пароль...'}
         secureTextEntry={true}
@@ -68,7 +58,7 @@ export const PasswordNoteModal = ({ getPass, note }) => {
       <TextInput
         value={rePass}
         onChangeText={ text => setRePass(text)}
-        style={{ ...styles.text, borderColor: appColor }}
+        style={{ ...styles.text, borderColor: appColor.appColor }}
         placeholder={'Повторить пароль...'}
         secureTextEntry={true}
       />

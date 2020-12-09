@@ -34,33 +34,27 @@ export const colors = {
 }
 
 export const noteColors = [
-  { color: 'lightgreen' },
-  { color: 'lightgray' },
-  { color: 'lightblue' },
-  { color: 'white' },
-  { color: '#ef476f' },
-  { color: '#ffd166' },
-  { color: '#06d6a0' },
-  { color: '#118ab2' },
-  { color: '#073b4c' },
-  { color: '#e71d36' },
-  { color: '#3a0ca3' },
-  { color: '#bc00dd' },
+  { appColor: '#41B619' },
+  { appColor: '#BCBEC0' },
+  { appColor: '#1771F1' },
+  { appColor: '#fff' },
+  { appColor: '#ef476f' },
+  { appColor: '#ffd166' },
+  { appColor: '#06d6a0' },
+  { appColor: '#118ab2' },
+  { appColor: '#FD0079' },
+  { appColor: '#e71d36' },
+  { appColor: '#51EAFF' },
+  { appColor: '#bc00dd' },
 ]
 
 export const appColors = [
-  { color: 'green' },
-  { color: 'gray' },
-  { color: 'blue' },
-  { color: 'white' },
-  { color: '#a100f2' },
-  { color: '#ffd166' },
-  // { color: '#06d6a0' },
-  // { color: '#118ab2' },
-  // { color: '#073b4c' },
-  // { color: '#e71d36' },
-  // { color: '#3a0ca3' },
-  // { color: '#bc00dd' },
+  { appColor: '#41B619',text: '#fff',drawer: '#5BFF62' },// text: '#fff',drawer: '#5BFF62'
+  { appColor: '#58595B',text: '#fff',drawer: '#939598' },// text: '#fff',drawer: '#939598'
+  { appColor: '#2300B0',text: '#fff',drawer: '#0260E8' },// text: '#fff',drawer: '#0260E8'
+  { appColor: '#FF756B',text: '#fff',drawer: '#FE9E76' },// text: '#000',drawer: '#A771FE'
+  { appColor: '#a100f2',text: '#fff', drawer: '#bc00dd' },// text: '#fff', drawer: '#bc00dd'
+  { appColor: '#FFC11E',text: '#fff',drawer: '#F5E027' },// text: '#fff',drawer: '#FBFF00'
 ]
 
 export const fontFamilyNote = [
@@ -74,4 +68,23 @@ export const fontSizeNote = [
   { text:'12', id:'12' },
   { text:'14', id:'14' },
   { text:'16', id:'16' },
+]
+
+export const avatarIcons = [
+  { icon: require('../assets/avatar/avatar1.png'), id: '1' },
+  { icon: require('../assets/avatar/avatar2.png'), id: '2' },
+  { icon: require('../assets/avatar/avatar3.png'), id: '3' },
+  { icon: require('../assets/avatar/avatar4.png'), id: '4' },
+  { icon: require('../assets/avatar/avatar5.png'), id: '5' },
+  { icon: require('../assets/avatar/avatar6.png'), id: '6' },
+  { icon: require('../assets/avatar/avatar7.png'), id: '7' },
+  { icon: require('../assets/avatar/avatar8.png'), id: '8' },
+  { icon: require('../assets/avatar/avatar9.png'), id: '9' },
+  { icon: require('../assets/avatar/avatar10.png'), id: '10' },
+  { icon: require('../assets/avatar/avatar11.png'), id: '11' },
+  { icon: require('../assets/avatar/avatar12.png'), id: '12' },
+  { icon: require('../assets/avatar/avatar13.png'), id: '13' },
+  { icon: require('../assets/avatar/avatar14.png'), id: '14' },
+  { icon: require('../assets/avatar/avatar15.png'), id: '15' },
+  { icon: require('../assets/avatar/avatar16.png'), id: '16' },
 ]

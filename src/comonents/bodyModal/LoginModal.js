@@ -38,21 +38,21 @@ export const LoginModal = ({ push }) => {
     <View style={styles.container}>
       <View style={{alignItems:'flex-end',paddingVertical:5}}>
         <TouchableOpacity onPress={handlerButtonRegistration} >
-          <Text style={{color: appColor, fontSize: 15}}>Зарегистрироваться</Text>
+          <Text style={{color: appColor.appColor, fontSize: 15}}>Зарегистрироваться</Text>
         </TouchableOpacity>
       </View>
 
       <TextInput
         value={email}
         onChangeText={ text => setEmail(text)}
-        style={{ ...styles.text, borderColor: appColor }}
+        style={{ ...styles.text, borderColor: appColor.appColor }}
         autoFocus={true}
         placeholder={'Email...'}
       />
       <TextInput
         value={pass}
         onChangeText={ text => setPass(text)}
-        style={{ ...styles.text, borderColor: appColor }}
+        style={{ ...styles.text, borderColor: appColor.appColor }}
         placeholder={'Пароль...'}
         secureTextEntry={true}
       />

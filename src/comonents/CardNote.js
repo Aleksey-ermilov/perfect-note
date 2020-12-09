@@ -83,7 +83,7 @@ export default function CardNote ({ note, onPress, onLongPress }) {
           marginTop: 10,
         }}>
           <Caption>{`Категория: ${ trimString(findCategory()) }`}</Caption>
-          <Caption>{`Дата: ${format(new Date(note.date), 'yyyy-MM-dd', { locale: dateLocale.ru })}`}</Caption>
+          <Caption>{`Дата: ${format(new Date(+note.date), 'yyyy-MM-dd', { locale: dateLocale.ru })}`}</Caption>
         </View>
       </View>
     </TouchableRipple>

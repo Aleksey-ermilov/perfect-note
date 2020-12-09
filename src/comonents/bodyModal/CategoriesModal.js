@@ -22,7 +22,7 @@ export const CategoryModal = ({ getCategory, note }) => {
     getCategory(category);
   };
 
-  const renderItem = ({ item }) => <RadioButton.Item label={trimString(item.category)} value={item.id} color={appColor}/>;
+  const renderItem = ({ item }) => <RadioButton.Item label={trimString(item.category)} value={item.id} color={appColor.appColor}/>;
 
   return (
     <View style={styles.container}>

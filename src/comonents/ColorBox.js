@@ -9,7 +9,7 @@ export const ColorBox = ({ color, getColor }) => {
       onPress={() => getColor(color)}
     >
       <View style={{
-        backgroundColor: color,
+        backgroundColor: color.appColor,
         width: size,
         height: size,
         borderRadius: 50,

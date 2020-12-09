@@ -17,7 +17,7 @@ export const RadioListModal = ({ getValue, dataList, selected }) => {
     getValue(dataList.find( item => item.id === value));
   };
 
-  const renderItem = ({ item }) => <RadioButton.Item label={trimString(item.text)} value={item.id} color={appColor}/>;
+  const renderItem = ({ item }) => <RadioButton.Item label={trimString(item.text)} value={item.id} color={appColor.appColor}/>;
 
   return (
     <View style={styles.container}>

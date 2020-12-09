@@ -10,8 +10,8 @@ export const _Button = ({ title, onPress, styleContainer, styleText }) => {
   return (
 
     <TouchableNativeFeedback onPress={onPress} >
-      <View style={{...styles.container, ...styleContainer, backgroundColor: appColor}}>
-        <Text style={[styles.text, styleText]}>{title}</Text>
+      <View style={{...styles.container, ...styleContainer, backgroundColor: appColor.appColor}}>
+        <Text style={[{fontSize:16,color: appColor.text}, styleText]}>{title}</Text>
       </View>
     </TouchableNativeFeedback>
   );
