@@ -82,7 +82,7 @@ const UserPage = ({ navigation }) => {
       'Если Вы удалите пользователя, то всё заметки и созданные категории будут потеряны!',
       [
         {
-          text: 'Отмеа',
+          text: 'Отмена',
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
@@ -120,7 +120,7 @@ const UserPage = ({ navigation }) => {
       'Если Вы продолжете, то все имеющиеся заметки будут заменины на загруженные',
       [
         {
-          text: 'Отмеа',
+          text: 'Отмена',
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },

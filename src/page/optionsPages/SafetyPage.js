@@ -11,13 +11,7 @@ import { RadioListModal } from '../../comonents/bodyModal/RadioListModal';
 import { PasswordAppModal } from '../../comonents/bodyModal/PassworAppModal';
 import { PinPasswordAppModal } from '../../comonents/bodyModal/PinPasswordModal';
 
-import {} from '../../../theme';
-
-const appPassList = [
-  { text: 'Отключить', id: '1', type: 'disabled' },
-  { text: 'Пароль', id: '2', type: 'pass' },
-  { text: 'PIN-код', id: '3', type: 'pin' },
-];
+import { appPassList } from '../../../theme';
 
 const SafetyPage = ({ navigation }) => {
   const { isVisibleModal, Component, hiddenModal, showModal } = useContext(ModalContext);

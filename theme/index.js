@@ -23,6 +23,12 @@ export const sortArray = [
   {text: 'По дате', id: 'date'},
 ]
 
+export const appPassList = [
+  { text: 'Отключить', id: '1', type: 'disabled' },
+  { text: 'Пароль', id: '2', type: 'pass' },
+  { text: 'PIN-код', id: '3', type: 'pin' },
+];
+
 export const colors = {
   mainColor: '#a100f2',
   dateColorDrawer: '#fff',

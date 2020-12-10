@@ -16,7 +16,7 @@ import { NewCategoryModal } from '../src/comonents/bodyModal/NewCategoryModal';
 import { LoginModal } from '../src/comonents/bodyModal/LoginModal';
 
 export const CustomDrawerContent = (props) => {
-  const { categories, newCategory, removeCategory } = useContext(NoteContext);
+  const { categories, newCategory, removeCategory, removeAllCategories, removeAllNotes } = useContext(NoteContext);
   const { isVisibleModal, showModal, Component, hiddenModal } = useContext(ModalContext);
   const { logout, user } = useContext(UserContext);
   const { appColor, } = useContext(OptionsAppContext);
@@ -54,7 +54,7 @@ export const CustomDrawerContent = (props) => {
       'Если Вы удалите категорию, то всё записи будут добавлены корзину',
       [
         {
-          text: 'Отмеа',
+          text: 'Отмена',
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
@@ -76,9 +76,26 @@ export const CustomDrawerContent = (props) => {
   };
 
   const logoutHandler = () => {
-    console.log('logout');
-    logout();
-    // props.navigation.navigate('OptionsStack', { screen: 'OptionsPage' });
+    // console.log('logout');
+    Alert.alert(
+      'Выход',
+      'Хотите ли вы очистить список заметок?',
+      [
+        {
+          text: 'Отмена',
+          onPress: () => logout(),
+          style: 'cancel',
+        },
+        {
+          text: 'Очистить', onPress: () => {
+            removeAllCategories()
+            removeAllNotes()
+            logout();
+          },
+        },
+      ],
+      { cancelable: false },
+    );
   };
 
   return (
