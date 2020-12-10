@@ -2,7 +2,11 @@
   "expo": {
     "name": "perfect-note",
     "slug": "perfect-note",
+    "privacy": "public",
     "version": "1.0.0",
+    "platforms": [
+      "android"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon-perfect-note-2.png",
     "splash": {
@@ -16,13 +20,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
     "android": {
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     }
   }
 }
